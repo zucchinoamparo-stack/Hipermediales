@@ -15,7 +15,9 @@ Los textos de música (`MU*`, `MA*`, `ML*`, `MM*`) tienen además un **modo letr
 - Las posiciones legibles están empaquetadas a mano en 4 columnas + fila de academia + columna de literatura; se verificó **0 solapamientos** en el layout legible.
 - Los textos de una misma zona comparten el **mismo punto** en el layout superpuesto (decisión del usuario).
 - Dos layouts por texto (`overlap` y `readable`) interpolados por zoom.
-- Zoom con rueda y pinch de trackpad centrado en el cursor; sin arrastre. La cámara queda **acotada a los bordes del lienzo**, así no se puede perder la página.
+- Zoom con rueda y pinch de trackpad centrado en el cursor.
+- **Navegación con el cursor, sin clic**: al mover el mouse la imagen acompaña al puntero (si el cursor baja, la imagen baja), con una ganancia menor a 1 para poder apuntar a los textos.
+- La cámara queda **acotada a los bordes del lienzo**, así no se puede perder la página.
 - Foco por proximidad al cursor con atenuación del resto.
 - Modo letra para los textos `M*` con avance automático cada 1 s.
 - Fuentes self-hosted en `assets/fonts/` (Anton y Roboto Slab variable).
@@ -41,7 +43,7 @@ Los textos de música (`MU*`, `MA*`, `ML*`, `MM*`) tienen además un **modo letr
 | Textos de una misma zona | Se apilan en el mismo punto al alejar |
 | Separación | Cada texto tiene posición “superpuesta” y “legible”; el zoom interpola entre ambas |
 | Zoom | Escala limitada + separación + atenuación del resto |
-| Navegación | Rueda del mouse y pinch de trackpad; sin arrastre, teclado ni doble clic |
+| Navegación | Paneo siguiendo al cursor (sin clic) + rueda/pinch para zoom; sin teclado ni doble clic |
 | Trackpad | Solo pinch hace zoom; dos dedos sin pinch no desplazan |
 | Foco | Por proximidad al cursor |
 | Vista inicial | Red completa, textos superpuestos |
@@ -168,7 +170,9 @@ Reglas:
 - Unificar `deltaMode` y limitar el delta por evento para evitar saltos con trackpads.
 - Pinch de trackpad: llega como `wheel` con `ctrlKey = true`; el pinch táctil con dos dedos también está implementado.
 - Bloquear scroll de página con `wheel` no pasivo y `touch-action: none`.
-- Sin arrastre y sin teclado: el desplazamiento surge de alejar, mover el cursor y volver a acercar.
+- Paneo por cursor: cada movimiento suma `delta * panSensitivity` a la posición objetivo de la cámara. La ganancia menor a 1 evita que el texto quede pegado al puntero y permite apuntar a otro texto.
+- Sin arrastre y sin teclado: el desplazamiento surge de mover el cursor y de alejar/acercar el zoom.
+- Al salir de la ventana se olvida la última posición del puntero, para que reingresar no produzca un salto.
 
 ## Separación por zoom
 
@@ -194,6 +198,7 @@ Reglas:
 
 Se activa al enfocar un texto con `lyrics: true`.
 
+- La letra entra recién cuando el foco se mantiene **0.18 s** (`lyricsSettle`), para que el paneo con el cursor no haga parpadear el modo letra.
 - Ventana de lectura de **13.8em** con máscara de degradado de 12 % a 88 %.
 - Se ven 3 líneas antes y 3 después de la activa.
 - Línea activa: **1.4×** el tamaño base y **negrita 700**, conservando puntuación, mayúsculas y saltos de línea originales.
@@ -215,12 +220,14 @@ window.NETWORK_CONFIG = {
   wheelSensitivity: 0.0016,
   pinchSensitivity: 0.0025,
   smoothing: 0.16,           // suavizado de cámara por frame
+  panSensitivity: 0.5,       // cuánto acompaña la imagen al cursor (0–1)
   separationStart: 0.1,      // inicio de la separación
   separationEnd: 0.45,       // fin de la separación
   focusRadius: 170,          // radio de foco en px de pantalla
   focusOpacity: 0.22,        // opacidad del resto al enfocar
   focusStart: 0.85,          // separación mínima para enfocar
   lyricsInterval: 1,         // segundos por línea
+  lyricsSettle: 0.18,        // espera antes de entrar en modo letra
   lyricsInactiveOpacity: 0.3,
   lyricsActiveScale: 1.4
 };
@@ -230,13 +237,15 @@ Panel de desarrollo:
 
 - Oculto por defecto, sin texto visible para el usuario final.
 - Se abre con `?debug=1` o la tecla `D`.
-- Permite ajustar zoom máximo, sensibilidad, rango de separación, radio y opacidad de foco, y suavizado.
+- Permite ajustar zoom máximo, sensibilidad de rueda, paneo con cursor, rango de separación, radio y opacidad de foco, y suavizado.
 - Incluye un botón para volver a la vista general.
 
 ## Criterios de aceptación
 
 - Se ve la red completa al abrir, con textos superpuestos y sin UI.
-- La rueda y el pinch hacen zoom hacia el cursor; no hay arrastre ni scroll de página.
+- La rueda y el pinch hacen zoom hacia el cursor; no hay scroll de página.
+- Mover el cursor desplaza la imagen en la misma dirección, sin clic.
+- El paneo no mueve la imagen cuando el puntero está sobre el panel de desarrollo.
 - La cámara no se puede perder fuera del lienzo.
 - Al acercarse, los textos se separan de forma continua hasta el layout legible.
 - Cada texto puede leerse completo, incluidos los más largos.
@@ -247,7 +256,8 @@ Panel de desarrollo:
 
 ## Riesgos y puntos abiertos
 
-- **Densidad de la página:** el layout legible está empaquetado para evitar huecos, pero la vista inicial sigue siendo deliberadamente dispersa. Se puede compactar más moviendo `ANCHORS`.
+- **Paneo vs. foco:** como la imagen acompaña al cursor, mover el mouse también desplaza la página. Con `panSensitivity: 0.5` todavía se puede apuntar a otro texto; si se sube hacia 1, el texto queda pegado al puntero y cuesta cambiar de foco.
+- **Densidad de la página:** la vista inicial ahora encuadra el conjunto de textos (no el lienzo) y las zonas están compactadas. El centro sigue vacío porque así es la composición de `orden.png`; se puede seguir ajustando `ANCHORS`.
 - **Textos largos:** si un texto crece en el Excel, hay que revisar que su altura siga entrando en la columna asignada y que no solape a los vecinos.
 - **Modo letra en textos muy largos:** el avance es continuo y vuelve al inicio; si se prefiere que se detenga en la última línea, es un cambio de una línea en `advanceLyric`.
 - **Pinch en distintos navegadores:** validar el caso `wheel + ctrlKey` y el comportamiento en Safari.

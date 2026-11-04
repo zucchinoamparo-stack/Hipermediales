@@ -24,8 +24,10 @@
 
   let activeId = null;
   let activeLyricsItem = null;
+  let pendingLyrics = null;
   let lyricsClock = 0;
   let lastPinchDistance = null;
+  let lastPointer = null;
 
   const items = data.texts.map(buildItem);
   const byId = {};
@@ -267,6 +269,11 @@
         y: (sy - y) / zoom
       };
     },
+    panBy: function (dx, dy) {
+      this.targetX += dx;
+      this.targetY += dy;
+      this.constrain();
+    },
     zoomAt: function (sx, sy, factor) {
       const anchor = this.screenToWorld(sx, sy, true);
       this.targetZoom = clamp(
@@ -354,6 +361,7 @@
 
     activeId = id;
     activeLyricsItem = null;
+    pendingLyrics = null;
     lyricsClock = 0;
 
     for (let i = 0; i < items.length; i += 1) {
@@ -364,11 +372,33 @@
       item.el.classList.toggle("is-dim", id !== null && !isActive);
 
       if (isActive && item.lyrics) {
-        enterLyrics(item);
-        activeLyricsItem = item;
+        // La letra entra recién cuando el foco se asienta, para que el
+        // paneo con el cursor no haga parpadear el modo letra.
+        pendingLyrics = { item: item, elapsed: 0 };
       } else {
         item.el.classList.remove("is-lyrics");
       }
+    }
+  }
+
+  function updatePendingLyrics(dt) {
+    if (!pendingLyrics) {
+      return;
+    }
+
+    if (activeId !== pendingLyrics.item.data.id) {
+      pendingLyrics = null;
+      return;
+    }
+
+    pendingLyrics.elapsed += dt;
+
+    if (pendingLyrics.elapsed >= config.lyricsSettle) {
+      const item = pendingLyrics.item;
+      pendingLyrics = null;
+      enterLyrics(item);
+      activeLyricsItem = item;
+      lyricsClock = 0;
     }
   }
 
@@ -463,6 +493,25 @@
   });
 
   window.addEventListener("pointermove", function (event) {
+    const overPanel =
+      debugPanel &&
+      !debugPanel.hidden &&
+      event.target &&
+      event.target.closest &&
+      event.target.closest("#debug");
+
+    if (lastPointer && !overPanel) {
+      const dx = event.clientX - lastPointer.x;
+      const dy = event.clientY - lastPointer.y;
+
+      if (dx || dy) {
+        // Navegación sin clic: la imagen acompaña al cursor. La ganancia
+        // menor a 1 deja "apuntar" a un texto sin que se pegue al puntero.
+        camera.panBy(dx * config.panSensitivity, dy * config.panSensitivity);
+      }
+    }
+
+    lastPointer = { x: event.clientX, y: event.clientY };
     pointer.x = event.clientX;
     pointer.y = event.clientY;
     pointer.active = true;
@@ -470,10 +519,12 @@
 
   document.addEventListener("pointerleave", function () {
     pointer.active = false;
+    lastPointer = null;
   });
 
   window.addEventListener("blur", function () {
     pointer.active = false;
+    lastPointer = null;
   });
 
   window.addEventListener("resize", function () {
@@ -498,6 +549,7 @@
     const amount = separationAmount();
     positionItems(amount);
     updateFocus(amount);
+    updatePendingLyrics(dt);
     updateLyrics(dt);
 
     requestAnimationFrame(frame);
@@ -507,6 +559,7 @@
     const fields = [
       { key: "maxZoom", min: 1.5, max: 6, step: 0.1, digits: 1 },
       { key: "wheelSensitivity", min: 0.0004, max: 0.004, step: 0.0001, digits: 4 },
+      { key: "panSensitivity", min: 0.1, max: 1, step: 0.05, digits: 2 },
       { key: "separationStart", min: 0, max: 0.8, step: 0.01, digits: 2 },
       { key: "separationEnd", min: 0.2, max: 1, step: 0.01, digits: 2 },
       { key: "focusRadius", min: 40, max: 420, step: 10, digits: 0 },
