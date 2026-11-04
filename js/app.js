@@ -126,11 +126,32 @@
     for (let i = 0; i < lyrics.els.length; i += 1) {
       lyrics.els[i].classList.toggle("is-active", i === item.lyricIndex);
     }
+
+    if (item.el.classList.contains("is-lyrics")) {
+      centerLyric(item);
+    }
+  }
+
+  function centerLyric(item) {
+    const lyrics = item.lyrics;
+    const line = lyrics.els[item.lyricIndex];
+    if (!line) {
+      return;
+    }
+    const offset = line.offsetTop + line.offsetHeight / 2;
+    const height = lyrics.viewport.clientHeight;
+    lyrics.track.style.transform =
+      "translate3d(0, " + (height / 2 - offset) + "px, 0)";
   }
 
   function enterLyrics(item) {
+    const track = item.lyrics.track;
+    track.style.transition = "none";
     item.el.classList.add("is-lyrics");
     paintLyric(item);
+    centerLyric(item);
+    void track.offsetHeight;
+    track.style.transition = "";
   }
 
   function advanceLyric(item) {

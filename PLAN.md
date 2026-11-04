@@ -205,12 +205,13 @@ Reglas:
 Se activa al enfocar un texto con `lyrics: true`.
 
 - La letra entra recién cuando el foco se mantiene **0.18 s** (`lyricsSettle`), para que el arrastre no haga parpadear el modo letra.
-- Al enfocar, se muestra **la letra completa en su lugar**: sin ventana recortada, sin máscara y sin cambiar el tamaño del bloque.
-- La línea activa se agranda **1.4×** con `transform: scale()` (no con `font-size`), para que el texto no se reacomode ni cambie de posición.
+- Al enfocar, el texto se convierte en una **ventana de lectura centrada en la línea activa**, con **3 líneas antes y 3 después** visibles. La ventana ocupa el lugar del texto, es decir, el centro de zoom del usuario.
+- La ventana mide **13.8em** de alto, recorta el resto (`overflow: hidden`) y se desvanece arriba y abajo con una máscara de degradado de 12 % a 88 %.
+- El bloque interno se desplaza con una transición de ~250 ms para mantener la línea activa en el centro de la ventana.
 - Línea activa: **1.4×** el tamaño base y **negrita 700**, conservando puntuación, mayúsculas y saltos de línea originales.
 - Líneas inactivas: opacidad **0.3**.
 - Las líneas del texto se envuelven si son largas; las líneas vacías se conservan y separan estrofas.
-- Avance automático cada **1 s**: solo cambia el resaltado (con transición de ~250 ms); el bloque de texto no se desplaza, no se recorta y no cambia de tamaño.
+- Avance automático cada **1 s**, desplazando la ventana y fundiendo el resaltado.
 - El recorrido es continuo: después de la última línea vuelve a la primera.
 - El índice de cada texto se conserva entre entradas y salidas de foco.
 - Al salir del foco, el texto vuelve a su estado normal (contenido completo, sin ventana de letra).
@@ -261,7 +262,7 @@ Panel de desarrollo:
 
 ## Riesgos y puntos abiertos
 
-- **Letra completa en zoom alto:** un texto muy largo puede medir más que la pantalla; como el bloque queda fijo, hay que alejar el zoom o arrastrar para recorrerlo. Si se prefiere que la cámara siga la línea activa, es un cambio acotado.
+- **Ventana de letra y foco:** la ventana de 7 líneas cambia la altura visual del texto pero el foco usa la altura cacheada antes del modo letra; si se ajusta el tamaño de la ventana, revisar que el radio de foco siga seleccionando el texto correcto.
 - **Densidad de la página:** la vista inicial ahora encuadra el conjunto de textos (no el lienzo) y las zonas están compactadas. El centro sigue vacío porque así es la composición de `orden.png`; se puede seguir ajustando `ANCHORS`.
 - **Textos largos:** si un texto crece en el Excel, hay que revisar que su altura siga entrando en la columna asignada y que no solape a los vecinos.
 - **Modo letra en textos muy largos:** el avance es continuo y vuelve al inicio; si se prefiere que se detenga en la última línea, es un cambio de una línea en `advanceLyric`.
