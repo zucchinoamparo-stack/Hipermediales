@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Red de textos</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="stage">
+    <div id="world"></div>
+  </main>
+  <aside id="debug" hidden>
+    <label>zoom máximo <output id="out-maxZoom"></output><input id="in-maxZoom" type="range" min="1.5" max="6" step="0.1"></label>
+    <label>sensibilidad rueda <output id="out-wheelSensitivity"></output><input id="in-wheelSensitivity" type="range" min="0.0004" max="0.004" step="0.0001"></label>
+    <label>inicio separación <output id="out-separationStart"></output><input id="in-separationStart" type="range" min="0" max="0.8" step="0.01"></label>
+    <label>fin separación <output id="out-separationEnd"></output><input id="in-separationEnd" type="range" min="0.2" max="1" step="0.01"></label>
+    <label>radio de foco <output id="out-focusRadius"></output><input id="in-focusRadius" type="range" min="40" max="420" step="10"></label>
+    <label>opacidad del resto <output id="out-focusOpacity"></output><input id="in-focusOpacity" type="range" min="0" max="0.9" step="0.02"></label>
+    <label>suavizado <output id="out-smoothing"></output><input id="in-smoothing" type="range" min="0.04" max="0.4" step="0.01"></label>
+    <button id="reset-view" type="button">volver a la vista general</button>
+  </aside>
+  <script src="config.js"></script>
+  <script src="data/texts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

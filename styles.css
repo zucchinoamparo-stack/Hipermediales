@@ -1,0 +1,209 @@
+@font-face {
+  font-family: "Anton";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/anton-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Anton";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/anton-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Roboto Slab";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("assets/fonts/roboto-slab-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Roboto Slab";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("assets/fonts/roboto-slab-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  --bg: #000000;
+  --focus-opacity: 0.22;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+body {
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--bg);
+  touch-action: none;
+  cursor: default;
+}
+
+#world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: normal;
+  transform-origin: center center;
+  transform: translate3d(var(--tx, 0px), var(--ty, 0px), 0) translate(-50%, -50%) rotate(var(--rot, 0deg));
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+  will-change: transform, opacity;
+}
+
+.text.is-dim {
+  opacity: var(--focus-opacity);
+}
+
+.text.is-focus {
+  opacity: 1;
+  z-index: 1000 !important;
+}
+
+/* Modo letra (textos con id M) */
+
+.lyrics {
+  display: block;
+  line-height: inherit;
+}
+
+.lyric {
+  display: block;
+  margin: 0;
+  padding: 0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.text.is-lyrics .lyrics {
+  position: relative;
+  height: 13.8em;
+  overflow: hidden;
+  line-height: 1.7;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+}
+
+.text.is-lyrics .lyrics__track {
+  position: relative;
+  transition: transform 250ms cubic-bezier(0.25, 0.6, 0.3, 1);
+  will-change: transform;
+}
+
+.text.is-lyrics .lyric {
+  opacity: var(--lyrics-inactive, 0.3);
+  transition: opacity 250ms ease;
+}
+
+.text.is-lyrics .lyric.is-blank {
+  opacity: 0;
+}
+
+.text.is-lyrics .lyric.is-active {
+  opacity: 1;
+  font-size: calc(var(--lyrics-scale, 1.4) * 1em);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+#debug {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 2000;
+  width: 280px;
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+  background: rgba(12, 12, 12, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #d8d5cc;
+  font: 11px/1.3 ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+#debug[hidden] {
+  display: none;
+}
+
+#debug label {
+  display: grid;
+  gap: 4px;
+}
+
+#debug output {
+  color: #8d8677;
+}
+
+#debug input[type="range"] {
+  width: 100%;
+  margin: 0;
+  accent-color: #783030;
+}
+
+#debug button {
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #d8d5cc;
+  font: inherit;
+  cursor: pointer;
+}
+
+#debug button:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+}
