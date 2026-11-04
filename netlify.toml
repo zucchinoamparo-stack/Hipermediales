@@ -1,0 +1,3 @@
+# Sitio estático sin build: Netlify publica el contenido del repositorio tal cual.
+[build]
+  publish = "."
