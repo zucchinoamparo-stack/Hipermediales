@@ -2,11 +2,8 @@
   const config = window.NETWORK_CONFIG;
   const data = window.TEXT_NETWORK;
 
-  // Valores nuevos con default propio: si el navegador tiene cacheada una
+  // Valor nuevo con default propio: si el navegador tiene cacheada una
   // versión anterior de config.js, la app sigue funcionando igual.
-  if (!Number.isFinite(config.panSensitivity)) {
-    config.panSensitivity = 0.5;
-  }
   if (!Number.isFinite(config.lyricsSettle)) {
     config.lyricsSettle = 0.18;
   }
@@ -36,7 +33,7 @@
   let pendingLyrics = null;
   let lyricsClock = 0;
   let lastPinchDistance = null;
-  let lastPointer = null;
+  let drag = null;
 
   const items = data.texts.map(buildItem);
   const byId = {};
@@ -129,32 +126,11 @@
     for (let i = 0; i < lyrics.els.length; i += 1) {
       lyrics.els[i].classList.toggle("is-active", i === item.lyricIndex);
     }
-
-    if (item.el.classList.contains("is-lyrics")) {
-      centerLyric(item);
-    }
-  }
-
-  function centerLyric(item) {
-    const lyrics = item.lyrics;
-    const line = lyrics.els[item.lyricIndex];
-    if (!line) {
-      return;
-    }
-    const offset = line.offsetTop + line.offsetHeight / 2;
-    const height = lyrics.viewport.clientHeight;
-    lyrics.track.style.transform =
-      "translate3d(0, " + (height / 2 - offset) + "px, 0)";
   }
 
   function enterLyrics(item) {
-    const track = item.lyrics.track;
-    track.style.transition = "none";
     item.el.classList.add("is-lyrics");
     paintLyric(item);
-    centerLyric(item);
-    void track.offsetHeight;
-    track.style.transition = "";
   }
 
   function advanceLyric(item) {
@@ -425,7 +401,7 @@
   }
 
   function updateFocus(amount) {
-    if (!pointer.active || amount < config.focusStart) {
+    if (!pointer.active || amount < config.focusStart || (drag && drag.moved)) {
       setFocus(null);
       return;
     }
@@ -496,6 +472,7 @@
       }
 
       event.preventDefault();
+      endDrag();
       const a = event.touches[0];
       const b = event.touches[1];
       const distance = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
@@ -514,39 +491,71 @@
     lastPinchDistance = null;
   });
 
-  window.addEventListener("pointermove", function (event) {
-    const overPanel =
+  function overDebug(event) {
+    return (
       debugPanel &&
       !debugPanel.hidden &&
       event.target &&
       event.target.closest &&
-      event.target.closest("#debug");
+      event.target.closest("#debug")
+    );
+  }
 
-    if (lastPointer && !overPanel) {
-      const dx = event.clientX - lastPointer.x;
-      const dy = event.clientY - lastPointer.y;
+  function endDrag() {
+    drag = null;
+    document.body.classList.remove("is-dragging");
+  }
 
-      if (dx || dy) {
-        // Navegación sin clic: la imagen acompaña al cursor. La ganancia
-        // menor a 1 deja "apuntar" a un texto sin que se pegue al puntero.
-        camera.panBy(dx * config.panSensitivity, dy * config.panSensitivity);
-      }
+  window.addEventListener("pointerdown", function (event) {
+    if (event.button !== 0 || overDebug(event)) {
+      return;
     }
+    drag = {
+      id: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+      moved: false
+    };
+  });
 
-    lastPointer = { x: event.clientX, y: event.clientY };
+  window.addEventListener("pointermove", function (event) {
     pointer.x = event.clientX;
     pointer.y = event.clientY;
     pointer.active = true;
+
+    if (!drag || drag.id !== event.pointerId) {
+      return;
+    }
+
+    const dx = event.clientX - drag.x;
+    const dy = event.clientY - drag.y;
+
+    if (!drag.moved && Math.hypot(dx, dy) < 3) {
+      return;
+    }
+
+    if (!drag.moved) {
+      drag.moved = true;
+      document.body.classList.add("is-dragging");
+    }
+
+    // Arrastre 1:1: la imagen sigue al cursor mientras se mantiene el botón.
+    camera.panBy(dx, dy);
+    drag.x = event.clientX;
+    drag.y = event.clientY;
   });
+
+  window.addEventListener("pointerup", endDrag);
+  window.addEventListener("pointercancel", endDrag);
 
   document.addEventListener("pointerleave", function () {
     pointer.active = false;
-    lastPointer = null;
+    endDrag();
   });
 
   window.addEventListener("blur", function () {
     pointer.active = false;
-    lastPointer = null;
+    endDrag();
   });
 
   window.addEventListener("resize", function () {
@@ -581,7 +590,6 @@
     const fields = [
       { key: "maxZoom", min: 1.5, max: 6, step: 0.1, digits: 1 },
       { key: "wheelSensitivity", min: 0.0004, max: 0.004, step: 0.0001, digits: 4 },
-      { key: "panSensitivity", min: 0.1, max: 1, step: 0.05, digits: 2 },
       { key: "separationStart", min: 0, max: 0.8, step: 0.01, digits: 2 },
       { key: "separationEnd", min: 0.2, max: 1, step: 0.01, digits: 2 },
       { key: "focusRadius", min: 40, max: 420, step: 10, digits: 0 },

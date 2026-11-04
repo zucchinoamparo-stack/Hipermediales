@@ -64,7 +64,11 @@ body {
   overflow: hidden;
   background: var(--bg);
   touch-action: none;
-  cursor: default;
+  cursor: grab;
+}
+
+body.is-dragging #stage {
+  cursor: grabbing;
 }
 
 #world {
@@ -118,36 +122,22 @@ body {
   word-break: normal;
 }
 
+/* La letra se muestra completa y en su lugar: no hay ventana ni máscara.
+   El avance automático solo mueve el resaltado, no el bloque de texto. */
 .text.is-lyrics .lyrics {
   position: relative;
-  height: 13.8em;
-  overflow: hidden;
-  line-height: 1.7;
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    #000 12%,
-    #000 88%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    #000 12%,
-    #000 88%,
-    transparent 100%
-  );
+  height: auto;
+  overflow: visible;
 }
 
 .text.is-lyrics .lyrics__track {
   position: relative;
-  transition: transform 250ms cubic-bezier(0.25, 0.6, 0.3, 1);
-  will-change: transform;
+  transform: none;
 }
 
 .text.is-lyrics .lyric {
   opacity: var(--lyrics-inactive, 0.3);
-  transition: opacity 250ms ease;
+  transition: opacity 250ms ease, transform 250ms ease;
 }
 
 .text.is-lyrics .lyric.is-blank {
@@ -155,10 +145,13 @@ body {
 }
 
 .text.is-lyrics .lyric.is-active {
+  position: relative;
+  z-index: 2;
   opacity: 1;
-  font-size: calc(var(--lyrics-scale, 1.4) * 1em);
   font-weight: 700;
-  line-height: 1.2;
+  /* 1.4x sin reflow: el bloque no cambia de tamaño ni de posición. */
+  transform: scale(var(--lyrics-scale, 1.4));
+  transform-origin: left center;
 }
 
 #debug {

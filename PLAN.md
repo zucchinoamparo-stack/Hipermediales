@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Aplicación web para computadora (tablet como secundario) que muestra una red de textos superpuestos. El usuario navega únicamente con zoom (rueda del mouse o pinch de trackpad), centrado en el cursor. Al acercarse, los textos se separan hasta quedar legibles y el texto más cercano al cursor toma foco mientras el resto se atenúa.
+Aplicación web para computadora (tablet como secundario) que muestra una red de textos superpuestos. El usuario navega con el zoom (rueda del mouse o pinch de trackpad), centrado en el cursor, y con arrastre para desplazarse. Al acercarse, los textos se separan hasta quedar legibles y el texto más cercano al cursor toma foco mientras el resto se atenúa.
 
 Los textos de música (`MU*`, `MA*`, `ML*`, `MM*`) tienen además un **modo letra** tipo Spotify que se activa al enfocarlos.
 
@@ -16,7 +16,7 @@ Los textos de música (`MU*`, `MA*`, `ML*`, `MM*`) tienen además un **modo letr
 - Los textos de una misma zona comparten el **mismo punto** en el layout superpuesto (decisión del usuario).
 - Dos layouts por texto (`overlap` y `readable`) interpolados por zoom.
 - Zoom con rueda y pinch de trackpad centrado en el cursor.
-- **Navegación con el cursor, sin clic**: al mover el mouse la imagen acompaña al puntero (si el cursor baja, la imagen baja), con una ganancia menor a 1 para poder apuntar a los textos.
+- **Paneo con clic y arrastre** (1:1): mantenés el botón y la imagen sigue al cursor; al soltar, el cursor vuelve a enfocar textos.
 - La cámara queda **acotada a los bordes del lienzo**, así no se puede perder la página.
 - Foco por proximidad al cursor con atenuación del resto.
 - Modo letra para los textos `M*` con avance automático cada 1 s.
@@ -43,7 +43,7 @@ Los textos de música (`MU*`, `MA*`, `ML*`, `MM*`) tienen además un **modo letr
 | Textos de una misma zona | Se apilan en el mismo punto al alejar |
 | Separación | Cada texto tiene posición “superpuesta” y “legible”; el zoom interpola entre ambas |
 | Zoom | Escala limitada + separación + atenuación del resto |
-| Navegación | Paneo siguiendo al cursor (sin clic) + rueda/pinch para zoom; sin teclado ni doble clic |
+| Navegación | Paneo con clic y arrastre + rueda/pinch para zoom; sin teclado ni doble clic |
 | Trackpad | Solo pinch hace zoom; dos dedos sin pinch no desplazan |
 | Foco | Por proximidad al cursor |
 | Vista inicial | Red completa, textos superpuestos |
@@ -174,9 +174,11 @@ Reglas:
 - Unificar `deltaMode` y limitar el delta por evento para evitar saltos con trackpads.
 - Pinch de trackpad: llega como `wheel` con `ctrlKey = true`; el pinch táctil con dos dedos también está implementado.
 - Bloquear scroll de página con `wheel` no pasivo y `touch-action: none`.
-- Paneo por cursor: cada movimiento suma `delta * panSensitivity` a la posición objetivo de la cámara. La ganancia menor a 1 evita que el texto quede pegado al puntero y permite apuntar a otro texto.
-- Sin arrastre y sin teclado: el desplazamiento surge de mover el cursor y de alejar/acercar el zoom.
-- Al salir de la ventana se olvida la última posición del puntero, para que reingresar no produzca un salto.
+- Paneo con arrastre 1:1: `pointerdown` inicia el arrastre, cada `pointermove` suma el delta a la posición objetivo de la cámara y `pointerup` lo termina. El cursor pasa de `grab` a `grabbing`.
+- Mientras se arrastra, el foco se suspende para que el modo letra no parpadee; al soltar, vuelve a evaluarse bajo el cursor.
+- Un clic sin movimiento no inicia el paneo (hay un umbral de 3 px) y no altera el foco.
+- Sin teclado: el desplazamiento surge del arrastre y de alejar/acercar el zoom.
+- Al salir de la ventana se termina el arrastre en curso.
 
 ## Separación por zoom
 
@@ -202,13 +204,13 @@ Reglas:
 
 Se activa al enfocar un texto con `lyrics: true`.
 
-- La letra entra recién cuando el foco se mantiene **0.18 s** (`lyricsSettle`), para que el paneo con el cursor no haga parpadear el modo letra.
-- Ventana de lectura de **13.8em** con máscara de degradado de 12 % a 88 %.
-- Se ven 3 líneas antes y 3 después de la activa.
+- La letra entra recién cuando el foco se mantiene **0.18 s** (`lyricsSettle`), para que el arrastre no haga parpadear el modo letra.
+- Al enfocar, se muestra **la letra completa en su lugar**: sin ventana recortada, sin máscara y sin cambiar el tamaño del bloque.
+- La línea activa se agranda **1.4×** con `transform: scale()` (no con `font-size`), para que el texto no se reacomode ni cambie de posición.
 - Línea activa: **1.4×** el tamaño base y **negrita 700**, conservando puntuación, mayúsculas y saltos de línea originales.
 - Líneas inactivas: opacidad **0.3**.
 - Las líneas del texto se envuelven si son largas; las líneas vacías se conservan y separan estrofas.
-- Avance automático cada **1 s**, con transición de desplazamiento y fundido de ~250 ms.
+- Avance automático cada **1 s**: solo cambia el resaltado (con transición de ~250 ms); el bloque de texto no se desplaza, no se recorta y no cambia de tamaño.
 - El recorrido es continuo: después de la última línea vuelve a la primera.
 - El índice de cada texto se conserva entre entradas y salidas de foco.
 - Al salir del foco, el texto vuelve a su estado normal (contenido completo, sin ventana de letra).
@@ -224,7 +226,6 @@ window.NETWORK_CONFIG = {
   wheelSensitivity: 0.0016,
   pinchSensitivity: 0.0025,
   smoothing: 0.16,           // suavizado de cámara por frame
-  panSensitivity: 0.5,       // cuánto acompaña la imagen al cursor (0–1)
   separationStart: 0.1,      // inicio de la separación
   separationEnd: 0.45,       // fin de la separación
   focusRadius: 170,          // radio de foco en px de pantalla
@@ -241,15 +242,15 @@ Panel de desarrollo:
 
 - Oculto por defecto, sin texto visible para el usuario final.
 - Se abre con `?debug=1` o la tecla `D`.
-- Permite ajustar zoom máximo, sensibilidad de rueda, paneo con cursor, rango de separación, radio y opacidad de foco, y suavizado.
+- Permite ajustar zoom máximo, sensibilidad de rueda, rango de separación, radio y opacidad de foco, y suavizado.
 - Incluye un botón para volver a la vista general.
 
 ## Criterios de aceptación
 
 - Se ve la red completa al abrir, con textos superpuestos y sin UI.
 - La rueda y el pinch hacen zoom hacia el cursor; no hay scroll de página.
-- Mover el cursor desplaza la imagen en la misma dirección, sin clic.
-- El paneo no mueve la imagen cuando el puntero está sobre el panel de desarrollo.
+- Con clic y arrastre la imagen sigue al cursor 1:1, sin seleccionar texto.
+- El arrastre no se inicia cuando el puntero está sobre el panel de desarrollo.
 - La cámara no se puede perder fuera del lienzo.
 - Al acercarse, los textos se separan de forma continua hasta el layout legible.
 - Cada texto puede leerse completo, incluidos los más largos.
@@ -260,7 +261,7 @@ Panel de desarrollo:
 
 ## Riesgos y puntos abiertos
 
-- **Paneo vs. foco:** como la imagen acompaña al cursor, mover el mouse también desplaza la página. Con `panSensitivity: 0.5` todavía se puede apuntar a otro texto; si se sube hacia 1, el texto queda pegado al puntero y cuesta cambiar de foco.
+- **Letra completa en zoom alto:** un texto muy largo puede medir más que la pantalla; como el bloque queda fijo, hay que alejar el zoom o arrastrar para recorrerlo. Si se prefiere que la cámara siga la línea activa, es un cambio acotado.
 - **Densidad de la página:** la vista inicial ahora encuadra el conjunto de textos (no el lienzo) y las zonas están compactadas. El centro sigue vacío porque así es la composición de `orden.png`; se puede seguir ajustando `ANCHORS`.
 - **Textos largos:** si un texto crece en el Excel, hay que revisar que su altura siga entrando en la columna asignada y que no solape a los vecinos.
 - **Modo letra en textos muy largos:** el avance es continuo y vuelve al inicio; si se prefiere que se detenga en la última línea, es un cambio de una línea en `advanceLyric`.
