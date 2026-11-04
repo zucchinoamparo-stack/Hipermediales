@@ -43,8 +43,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 10,
       "overlap": {
-        "x": 210,
-        "y": 974
+        "x": 500,
+        "y": 880
       },
       "readable": {
         "x": 230,
@@ -76,8 +76,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 11,
       "overlap": {
-        "x": 210,
-        "y": 974
+        "x": 500,
+        "y": 880
       },
       "readable": {
         "x": 230,
@@ -109,8 +109,8 @@ window.TEXT_NETWORK = {
       "width": 420,
       "z": 12,
       "overlap": {
-        "x": 400,
-        "y": 1148
+        "x": 640,
+        "y": 1040
       },
       "readable": {
         "x": 1170,
@@ -140,8 +140,8 @@ window.TEXT_NETWORK = {
       "width": 420,
       "z": 13,
       "overlap": {
-        "x": 1203,
-        "y": 357
+        "x": 1180,
+        "y": 400
       },
       "readable": {
         "x": 610,
@@ -157,8 +157,8 @@ window.TEXT_NETWORK = {
       "width": 420,
       "z": 14,
       "overlap": {
-        "x": 1203,
-        "y": 357
+        "x": 1180,
+        "y": 400
       },
       "readable": {
         "x": 1060,
@@ -174,8 +174,8 @@ window.TEXT_NETWORK = {
       "width": 560,
       "z": 15,
       "overlap": {
-        "x": 1203,
-        "y": 357
+        "x": 1180,
+        "y": 400
       },
       "readable": {
         "x": 1590,
@@ -191,8 +191,8 @@ window.TEXT_NETWORK = {
       "width": 520,
       "z": 16,
       "overlap": {
-        "x": 1799,
-        "y": 1148
+        "x": 1640,
+        "y": 1060
       },
       "readable": {
         "x": 2110,
@@ -208,8 +208,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 17,
       "overlap": {
-        "x": 210,
-        "y": 974
+        "x": 500,
+        "y": 880
       },
       "readable": {
         "x": 230,
@@ -239,8 +239,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 18,
       "overlap": {
-        "x": 210,
-        "y": 974
+        "x": 500,
+        "y": 880
       },
       "readable": {
         "x": 230,
@@ -267,8 +267,8 @@ window.TEXT_NETWORK = {
       "width": 420,
       "z": 19,
       "overlap": {
-        "x": 400,
-        "y": 1148
+        "x": 640,
+        "y": 1040
       },
       "readable": {
         "x": 1170,
@@ -326,8 +326,8 @@ window.TEXT_NETWORK = {
       "width": 420,
       "z": 20,
       "overlap": {
-        "x": 400,
-        "y": 1148
+        "x": 640,
+        "y": 1040
       },
       "readable": {
         "x": 1170,
@@ -361,8 +361,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 21,
       "overlap": {
-        "x": 585,
-        "y": 1066
+        "x": 760,
+        "y": 960
       },
       "readable": {
         "x": 1600,
@@ -411,8 +411,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 22,
       "overlap": {
-        "x": 585,
-        "y": 1066
+        "x": 760,
+        "y": 960
       },
       "readable": {
         "x": 1600,
@@ -445,8 +445,8 @@ window.TEXT_NETWORK = {
       "width": 420,
       "z": 23,
       "overlap": {
-        "x": 400,
-        "y": 1148
+        "x": 640,
+        "y": 1040
       },
       "readable": {
         "x": 1170,
@@ -478,8 +478,8 @@ window.TEXT_NETWORK = {
       "width": 460,
       "z": 24,
       "overlap": {
-        "x": 400,
-        "y": 1148
+        "x": 640,
+        "y": 1040
       },
       "readable": {
         "x": 700,

@@ -49,13 +49,15 @@ CATEGORIES = {
     },
 }
 
-# Centro de cada zona tomado de orden.png (marco 1071x565) y escalado al lienzo.
+# Distribución de zonas tomada de orden.png y compactada para que la vista
+# general llene el cuadro: academia arriba al centro, músicas abajo a la
+# izquierda y literatura a la derecha.
 ANCHORS = {
-    "academia": (1203, 357),
-    "musica-universal": (210, 974),
-    "musica-argentina": (400, 1148),
-    "musica-latinoamericana": (585, 1066),
-    "literatura-latinoamericana": (1799, 1148),
+    "academia": (1180, 400),
+    "musica-universal": (500, 880),
+    "musica-argentina": (640, 1040),
+    "musica-latinoamericana": (760, 960),
+    "literatura-latinoamericana": (1640, 1060),
 }
 
 # Posición legible y ancho de cada texto (se verifican sin solapamientos).

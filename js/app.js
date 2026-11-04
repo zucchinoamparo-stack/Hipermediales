@@ -168,6 +168,9 @@
     fitZoom: 1,
     minZoom: 1,
     maxZoom: 1,
+    homeZoom: 0,
+    homeX: 0,
+    homeY: 0,
     setViewport: function (vw, vh, reset) {
       const previousCenter = this.vw
         ? this.screenToWorld(this.vw / 2, this.vh / 2, true)
@@ -193,10 +196,67 @@
       this.targetY = vh / 2 - previousCenter.y * this.targetZoom;
       this.constrain();
     },
-    reset: function () {
-      this.targetZoom = this.fitZoom;
-      this.targetX = (this.vw - data.design.width * this.fitZoom) / 2;
-      this.targetY = (this.vh - data.design.height * this.fitZoom) / 2;
+    // Encuadre inicial: ajusta el conjunto de textos (no el lienzo vacío),
+    // así la red ocupa el cuadro desde el principio. `amount` permite medir
+    // también el layout legible para el modo de desarrollo ?layout=read.
+    computeHome: function (amount) {
+      let minX = Infinity;
+      let minY = Infinity;
+      let maxX = -Infinity;
+      let maxY = -Infinity;
+
+      for (let i = 0; i < items.length; i += 1) {
+        const item = items[i];
+        const cx = lerp(item.data.overlap.x, item.data.readable.x, amount);
+        const cy = lerp(item.data.overlap.y, item.data.readable.y, amount);
+        minX = Math.min(minX, cx - item.width / 2);
+        maxX = Math.max(maxX, cx + item.width / 2);
+        minY = Math.min(minY, cy - item.height / 2);
+        maxY = Math.max(maxY, cy + item.height / 2);
+      }
+
+      if (!items.length) {
+        return;
+      }
+
+      const boxWidth = Math.max(maxX - minX, 1);
+      const boxHeight = Math.max(maxY - minY, 1);
+      const zoom = Math.min(
+        this.vw / (boxWidth / config.fitPadding),
+        this.vh / (boxHeight / config.fitPadding)
+      );
+
+      this.homeZoom = clamp(zoom, this.fitZoom, this.maxZoom);
+      this.homeX = this.vw / 2 - ((minX + maxX) / 2) * this.homeZoom;
+      this.homeY = this.vh / 2 - ((minY + maxY) / 2) * this.homeZoom;
+
+      const width = data.design.width * this.homeZoom;
+      const height = data.design.height * this.homeZoom;
+      this.homeX =
+        width <= this.vw
+          ? (this.vw - width) / 2
+          : clamp(this.homeX, this.vw - width, 0);
+      this.homeY =
+        height <= this.vh
+          ? (this.vh - height) / 2
+          : clamp(this.homeY, this.vh - height, 0);
+    },
+    reset: function (instant) {
+      if (this.homeZoom) {
+        this.targetZoom = this.homeZoom;
+        this.targetX = this.homeX;
+        this.targetY = this.homeY;
+      } else {
+        this.targetZoom = this.fitZoom;
+        this.targetX = (this.vw - data.design.width * this.fitZoom) / 2;
+        this.targetY = (this.vh - data.design.height * this.fitZoom) / 2;
+      }
+
+      if (instant) {
+        this.zoom = this.targetZoom;
+        this.x = this.targetX;
+        this.y = this.targetY;
+      }
     },
     screenToWorld: function (sx, sy, useTarget) {
       const zoom = useTarget ? this.targetZoom : this.zoom;
@@ -268,12 +328,12 @@
     if (forcedLayout === "overlap") {
       return 0;
     }
-    const t = clamp(
-      Math.log(camera.zoom / camera.minZoom) /
-        Math.log(camera.maxZoom / camera.minZoom),
-      0,
-      1
-    );
+    const home = camera.homeZoom || camera.fitZoom;
+    const span = Math.log(camera.maxZoom / home);
+    const t =
+      span > 0
+        ? clamp(Math.log(camera.zoom / home) / span, 0, 1)
+        : 1;
     return smoothstep(config.separationStart, config.separationEnd, t);
   }
 
@@ -417,7 +477,14 @@
   });
 
   window.addEventListener("resize", function () {
+    const wasHome =
+      camera.homeZoom > 0 &&
+      Math.abs(camera.targetZoom - camera.homeZoom) < 0.001;
     camera.setViewport(window.innerWidth, window.innerHeight, false);
+    camera.computeHome(forcedLayout === "read" ? 1 : 0);
+    if (wasHome) {
+      camera.reset(true);
+    }
   });
 
   let lastTime = 0;
@@ -525,6 +592,7 @@
     }
 
     camera.setViewport(window.innerWidth, window.innerHeight, true);
+    camera.computeHome(forcedLayout === "read" ? 1 : 0);
 
     const zoomParam = params.get("zoom");
     if (zoomParam) {
@@ -537,6 +605,9 @@
       camera.zoom = camera.targetZoom = zoom;
       camera.x = camera.targetX = camera.vw / 2 - centerX * zoom;
       camera.y = camera.targetY = camera.vh / 2 - centerY * zoom;
+      camera.constrain();
+    } else {
+      camera.reset(true);
     }
 
     positionItems(separationAmount());
