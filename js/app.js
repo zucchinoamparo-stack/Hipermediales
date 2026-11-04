@@ -1,6 +1,15 @@
 (function () {
   const config = window.NETWORK_CONFIG;
   const data = window.TEXT_NETWORK;
+
+  // Valores nuevos con default propio: si el navegador tiene cacheada una
+  // versión anterior de config.js, la app sigue funcionando igual.
+  if (!Number.isFinite(config.panSensitivity)) {
+    config.panSensitivity = 0.5;
+  }
+  if (!Number.isFinite(config.lyricsSettle)) {
+    config.lyricsSettle = 0.18;
+  }
   const stage = document.getElementById("stage");
   const world = document.getElementById("world");
   const debugPanel = document.getElementById("debug");
@@ -270,6 +279,9 @@
       };
     },
     panBy: function (dx, dy) {
+      if (!Number.isFinite(dx) || !Number.isFinite(dy)) {
+        return;
+      }
       this.targetX += dx;
       this.targetY += dy;
       this.constrain();
@@ -298,6 +310,16 @@
           : clamp(this.targetY, this.vh - height, 0);
     },
     update: function (dt) {
+      if (
+        !Number.isFinite(this.targetZoom) ||
+        !Number.isFinite(this.targetX) ||
+        !Number.isFinite(this.targetY)
+      ) {
+        // Red de seguridad: una config vieja o un valor inválido no debe
+        // dejar la página congelada con una transformación NaN.
+        this.reset(true);
+        return;
+      }
       const k = 1 - Math.pow(1 - config.smoothing, dt * 60);
       this.zoom += (this.targetZoom - this.zoom) * k;
       this.x += (this.targetX - this.x) * k;

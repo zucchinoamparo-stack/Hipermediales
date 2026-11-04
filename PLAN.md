@@ -74,6 +74,10 @@ Los textos de música (`MU*`, `MA*`, `ML*`, `MM*`) tienen además un **modo letr
 
 Sin bundler, sin npm obligatorio. Servir con `python -m http.server` o Live Server para pruebas locales.
 
+### Cache y versionado
+
+`index.html` referencia los assets con `?v=N` (`styles.css?v=3`, `config.js?v=3`, etc.). Al modificar CSS o JS hay que subir ese número para que los navegadores no mezclen versiones viejas y nuevas. Mezclar un `app.js` nuevo con un `config.js` viejo puede producir valores `NaN` y congelar la vista; por eso además `app.js` define defaults para los parámetros nuevos y la cámara se autorresetea si detecta una transformación inválida.
+
 ## Categorías tipográficas
 
 | Categoría | Fuente | Tamaño / interlineado | Color | Otros |
