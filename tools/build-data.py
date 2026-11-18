@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DEST = ROOT / "data" / "texts.js"
 DEFAULT_SOURCE = Path(r"C:\Users\zucch\OneDrive\Documentos\Hipermediales\dataset.xlsx")
 
-DESIGN = {"width": 2400, "height": 1400, "background": "#000000"}
+DESIGN = {"width": 2400, "height": 2000, "background": "#000000"}
 
 CATEGORIES = {
     "A": {
@@ -47,36 +47,61 @@ CATEGORIES = {
         "color": "#783030",
         "textTransform": "none",
     },
+    # Variante legible de B para textos largos: conserva Anton en mayúsculas y
+    # el color, pero con un cuerpo que permite leerlos dentro del mapa.
+    "B-long": {
+        "fontFamily": "'Anton', 'Arial Narrow', Impact, sans-serif",
+        "fontSize": 12,
+        "fontWeight": 400,
+        "lineHeight": 13,
+        "letterSpacing": "-0.01em",
+        "color": "#f4f2ea",
+        "textTransform": "uppercase",
+    },
 }
+
+# Los textos B de más de esta cantidad de caracteres se muestran con la
+# variante legible; los B breves conservan el cuerpo display de 52 px.
+B_LONG_THRESHOLD = 400
 
 # Distribución de zonas tomada de orden.png y compactada para que la vista
 # general llene el cuadro: academia arriba al centro, músicas abajo a la
-# izquierda y literatura a la derecha.
+# izquierda y literatura a la derecha. La banda académica nueva ocupa la
+# franja superior, por eso el resto de la composición baja 600 px.
+Y_OFFSET = 600
 ANCHORS = {
-    "academia": (1180, 400),
-    "musica-universal": (500, 880),
-    "musica-argentina": (640, 1040),
-    "musica-latinoamericana": (760, 960),
-    "literatura-latinoamericana": (1640, 1060),
+    "academia": (1180, 400 + Y_OFFSET),
+    "musica-universal": (500, 880 + Y_OFFSET),
+    "musica-argentina": (640, 1040 + Y_OFFSET),
+    "musica-latinoamericana": (760, 960 + Y_OFFSET),
+    "literatura-latinoamericana": (1640, 1060 + Y_OFFSET),
 }
 
 # Posición legible y ancho de cada texto (se verifican sin solapamientos).
 READABLE = {
-    "AM1": {"x": 610, "y": 200, "width": 420},
-    "AM2": {"x": 1060, "y": 215, "width": 420},
-    "AM3": {"x": 1590, "y": 200, "width": 560},
-    "MU1": {"x": 230, "y": 580, "width": 400},
-    "MU2": {"x": 230, "y": 731, "width": 400},
-    "MU3": {"x": 230, "y": 874, "width": 400},
-    "MU4": {"x": 230, "y": 995, "width": 400},
-    "MA5": {"x": 700, "y": 880, "width": 460},
-    "MA1": {"x": 1170, "y": 1179, "width": 420},
-    "MA2": {"x": 1170, "y": 603, "width": 420},
-    "MA3": {"x": 1170, "y": 876, "width": 420},
-    "MA4": {"x": 1170, "y": 1036, "width": 420},
-    "ML1": {"x": 1600, "y": 620, "width": 400},
-    "ML2": {"x": 1600, "y": 849, "width": 400},
-    "LL1": {"x": 2110, "y": 930, "width": 520},
+    "AM1": {"x": 610, "y": 200 + Y_OFFSET, "width": 420},
+    "AM2": {"x": 1060, "y": 215 + Y_OFFSET, "width": 420},
+    "AM3": {"x": 1590, "y": 200 + Y_OFFSET, "width": 560},
+    "MU1": {"x": 230, "y": 580 + Y_OFFSET, "width": 400},
+    "MU2": {"x": 230, "y": 731 + Y_OFFSET, "width": 400},
+    "MU3": {"x": 230, "y": 874 + Y_OFFSET, "width": 400},
+    "MU4": {"x": 230, "y": 995 + Y_OFFSET, "width": 400},
+    "MA5": {"x": 700, "y": 880 + Y_OFFSET, "width": 460},
+    "MA1": {"x": 1170, "y": 1179 + Y_OFFSET, "width": 420},
+    "MA2": {"x": 1170, "y": 603 + Y_OFFSET, "width": 420},
+    "MA3": {"x": 1170, "y": 876 + Y_OFFSET, "width": 420},
+    "MA4": {"x": 1170, "y": 1036 + Y_OFFSET, "width": 420},
+    "ML1": {"x": 1600, "y": 620 + Y_OFFSET, "width": 400},
+    "ML2": {"x": 1600, "y": 849 + Y_OFFSET, "width": 400},
+    "LL1": {"x": 2110, "y": 930 + Y_OFFSET, "width": 520},
+    # Academia nueva: banda superior con los textos AU, en 4 columnas.
+    "AU4": {"x": 300, "y": 170, "width": 560},
+    "AU5": {"x": 900, "y": 170, "width": 560},
+    "AU6": {"x": 1500, "y": 170, "width": 560},
+    "AU7": {"x": 2100, "y": 170, "width": 560},
+    "AU8": {"x": 300, "y": 460, "width": 560},
+    "AU9": {"x": 900, "y": 460, "width": 560},
+    "AU10": {"x": 1500, "y": 460, "width": 560},
 }
 
 # Correcciones puntuales de saltos de línea perdidos en el Excel.
@@ -105,9 +130,12 @@ ZONE_PREFIXES = [
 def normalize(text):
     text = text.replace("_x000B_", "\n").replace("\x0b", "\n")
     text = text.replace("\r\n", "\n").replace("\r", "\n")
+    # Varios textos académicos vienen copiados de PDF con tabulaciones entre
+    # palabras; se convierten en espacios normales.
+    text = text.replace("\t", " ")
     for wrong, right in LINE_FIXES.items():
         text = text.replace(wrong, right)
-    return text.strip()
+    return "\n".join(line.rstrip() for line in text.split("\n")).strip()
 
 
 def zone_for(text_id):
@@ -151,6 +179,8 @@ def main():
         text_id = str(raw_id).strip()
         category = str(ws.cell(row, 2).value or "A").strip().upper()
         content = normalize(ws.cell(row, 3).value or "")
+        if category == "B" and len(content) > B_LONG_THRESHOLD:
+            category = "B-long"
         shape = READABLE[text_id]
         zone = zone_for(text_id)
         anchor = ANCHORS[zone]

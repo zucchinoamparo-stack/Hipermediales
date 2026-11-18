@@ -6,13 +6,14 @@ Aplicación web para computadora (tablet como secundario) que muestra una red de
 
 Los textos de música (`MU*`, `MA*`, `ML*`, `MM*`) tienen además un **modo letra** tipo Spotify que se activa al enfocarlos.
 
-**Estado: implementado con el dataset definitivo de 15 textos.**
+**Estado: implementado con el dataset de 22 textos (15 originales + 7 académicos nuevos).**
 
 ## Estado actual del prototipo
 
 - Archivos: `index.html`, `styles.css`, `config.js`, `data/texts.js`, `js/app.js`, `tools/build-data.py`.
-- Carga los 15 textos del Excel `dataset.xlsx` (fuera del proyecto) distribuyendo cada uno en la zona temática de `orden.png`.
-- Las posiciones legibles están empaquetadas a mano en 4 columnas + fila de academia + columna de literatura; se verificó **0 solapamientos** en el layout legible.
+- Carga los 22 textos del Excel `dataset.xlsx` (fuera del proyecto) distribuyendo cada uno en la zona temática de `orden.png`.
+- Las posiciones legibles están empaquetadas a mano en una **banda académica superior** (7 textos AU en 4 columnas), 4 columnas para música, la fila de academia original y la columna de literatura; se verificó **0 solapamientos** en el layout legible.
+- Los textos `AU4`–`AU10` llegan como categoría B pero son largos: usan la variante **B-long** (Anton 12 px, mayúsculas) para poder leerse dentro del mapa sin agrandar el lienzo en exceso.
 - Los textos de una misma zona comparten el **mismo punto** en el layout superpuesto (decisión del usuario).
 - Dos layouts por texto (`overlap` y `readable`) interpolados por zoom.
 - Zoom con rueda y pinch de trackpad centrado en el cursor.
@@ -36,10 +37,10 @@ Los textos de música (`MU*`, `MA*`, `ML*`, `MM*`) tienen además un **modo letr
 
 | Tema | Decisión |
 |---|---|
-| Cantidad de textos | 15 (dataset definitivo) |
+| Cantidad de textos | 22 (15 originales + 7 académicos AU) |
 | Contenido | Excel `C:\Users\zucch\OneDrive\Documentos\Hipermediales\dataset.xlsx` |
 | Posiciones | Fijas, derivadas de las zonas de `orden.png` |
-| Zonas | academia, música universal, música argentina, música latinoamericana, literatura latinoamericana |
+| Zonas | academia (con banda AU), música universal, música argentina, música latinoamericana, literatura latinoamericana |
 | Textos de una misma zona | Se apilan en el mismo punto al alejar |
 | Separación | Cada texto tiene posición “superpuesta” y “legible”; el zoom interpola entre ambas |
 | Zoom | Escala limitada + separación + atenuación del resto |
@@ -47,7 +48,7 @@ Los textos de música (`MU*`, `MA*`, `ML*`, `MM*`) tienen además un **modo letr
 | Trackpad | Solo pinch hace zoom; dos dedos sin pinch no desplazan |
 | Foco | Por proximidad al cursor |
 | Vista inicial | Red completa, textos superpuestos |
-| Adaptación | Lienzo fijo 2400×1400 escalado a la ventana |
+| Adaptación | Lienzo fijo 2400×2000 escalado a la ventana |
 | Textos largos | Se leen completos en el mapa, sin panel |
 | Estilo | Categorías con tipografía y color propios, según Figma |
 | Fuentes | Google Fonts descargadas y servidas localmente |
@@ -76,7 +77,7 @@ Sin bundler, sin npm obligatorio. Servir con `python -m http.server` o Live Serv
 
 ### Cache y versionado
 
-`index.html` referencia los assets con `?v=N` (`styles.css?v=3`, `config.js?v=3`, etc.). Al modificar CSS o JS hay que subir ese número para que los navegadores no mezclen versiones viejas y nuevas. Mezclar un `app.js` nuevo con un `config.js` viejo puede producir valores `NaN` y congelar la vista; por eso además `app.js` define defaults para los parámetros nuevos y la cámara se autorresetea si detecta una transformación inválida.
+`index.html` referencia los assets con `?v=N` (`styles.css?v=6`, `config.js?v=6`, etc.). Al modificar CSS o JS hay que subir ese número para que los navegadores no mezclen versiones viejas y nuevas. Mezclar un `app.js` nuevo con un `config.js` viejo puede producir valores `NaN` y congelar la vista; por eso además `app.js` define defaults para los parámetros nuevos y la cámara se autorresetea si detecta una transformación inválida.
 
 ## Categorías tipográficas
 
@@ -84,9 +85,10 @@ Sin bundler, sin npm obligatorio. Servir con `python -m http.server` o Live Serv
 |---|---|---|---|---|
 | A | Roboto Slab 400 | 8.5 / 8.5 px | `#efece3` | — |
 | B | Anton 400 | 52 / 51 px | `#f4f2ea` | mayúsculas, tracking −0.01em |
+| B-long | Anton 400 | 12 / 13 px | `#f4f2ea` | mayúsculas, tracking −0.01em |
 | C | Roboto Slab 300 | 8 / 9.5 px | `#783030` | — |
 
-La categoría B queda definida para titulares, pero el dataset actual no trae ninguna fila B.
+La categoría B de 52 px queda reservada para titulares breves. Los textos B de más de 400 caracteres se generan como **B-long**: conservan Anton, mayúsculas y color, pero con un cuerpo legible dentro del mapa.
 
 Roboto Slab se sirve como fuente variable (`wght 100–900`), lo que permite que el modo letra use negrita real (700) y no una negrita sintética.
 
@@ -103,26 +105,34 @@ python tools/build-data.py "C:/ruta/al/dataset.xlsx"
 El script:
 
 1. Lee la primera hoja del Excel (columna 1 = id, 2 = categoría, 3 = texto).
-2. Normaliza los saltos de línea `_x000B_` a `\n`.
+2. Normaliza los saltos de línea `_x000B_` a `\n`, las tabulaciones de los textos copiados de PDF a espacios y los espacios finales de cada línea.
 3. Aplica correcciones puntuales de saltos perdidos (`You want it darker` / `Hineni, hineni` y `Come with me` / `In the demonstration…`).
-4. Asigna zona según el prefijo del id:
+4. Convierte los textos `B` de más de 400 caracteres a la categoría `B-long`.
+5. Asigna zona según el prefijo del id:
    - `AM` → academia
    - `MU` → música universal
    - `MA` → música argentina
    - `ML`, `MM` → música latinoamericana
    - `LL`, `L` → literatura latinoamericana
    - `A*` → academia
-5. Calcula el layout legible desde `READABLE` y el punto superpuesto desde `ANCHORS`.
-6. Para los textos `M*`, construye `lines[]`: `/` separa versos y `//` separa estrofas; el resto conserva sus saltos de línea reales.
-7. Escribe `data/texts.js` con `window.TEXT_NETWORK`.
+6. Calcula el layout legible desde `READABLE` y el punto superpuesto desde `ANCHORS`.
+7. Para los textos `M*`, construye `lines[]`: `/` separa versos y `//` separa estrofas; el resto conserva sus saltos de línea reales.
+8. Escribe `data/texts.js` con `window.TEXT_NETWORK`.
 
 Para mover un texto hay que editar `READABLE` (layout legible) o `ANCHORS` (punto de la zona) y volver a ejecutar el script. Conviene revisar que el layout legible siga sin solapamientos.
+
+### Layout con los textos académicos nuevos
+
+- `AU4`–`AU10` comparten la zona **academia** y se apilan en el mismo punto al alejar.
+- Para que entren legibles sin romper la composición, la franja superior del lienzo se reserva para una banda de **4 columnas × 2 filas**; el resto del mapa baja `Y_OFFSET = 600` px.
+- Lienzo final: **2400×2000**. La banda AU ocupa `y` 14–577 y el contenido original queda en `y` 718–1830.
+- Verificado con **0 solapamientos** en `?layout=read` y sin errores en consola.
 
 ## Modelo de datos
 
 ```js
 window.TEXT_NETWORK = {
-  design: { width: 2400, height: 1400, background: "#000000" },
+  design: { width: 2400, height: 2000, background: "#000000" },
   categories: {
     A: {
       fontFamily: "'Roboto Slab', Rockwell, serif",
@@ -142,8 +152,8 @@ window.TEXT_NETWORK = {
       lyrics: true,                  // solo textos M*
       width: 400,
       z: 10,
-      overlap: { x: 210, y: 974 },   // centro en espacio de diseño
-      readable: { x: 230, y: 580 },
+      overlap: { x: 500, y: 1480 },  // centro en espacio de diseño
+      readable: { x: 230, y: 1180 },
       content: "Texto completo...",
       lines: ["Línea 1", "Línea 2", "..."] // solo si lyrics
     }
@@ -164,7 +174,7 @@ Reglas:
 - `#world`: tamaño `design.width × design.height`, `transform-origin: 0 0`.
 - Transformación: `screen = world * zoom + offset`.
 - Cámara: `{ x, y, zoom }` con valores objetivo y suavizado exponencial por frame.
-- Encuadre inicial: `zoomFit = min(vw / design.width, vh / design.height) * 0.94`; centrar el lienzo.
+- Encuadre inicial: se calcula el bounding box del layout superpuesto y se ajusta con `computeHome`, para que la red ocupe el cuadro sin depender del espacio vacío del lienzo.
 - Zoom mínimo: `zoomFit * 0.8`. Zoom máximo: `2.4`.
 - Zoom centrado en el cursor:
   1. Convertir la posición del cursor a coordenadas de mundo antes del zoom.
@@ -264,6 +274,7 @@ Panel de desarrollo:
 
 - **Ventana de letra y foco:** la ventana de 7 líneas cambia la altura visual del texto pero el foco usa la altura cacheada antes del modo letra; si se ajusta el tamaño de la ventana, revisar que el radio de foco siga seleccionando el texto correcto.
 - **Densidad de la página:** la vista inicial ahora encuadra el conjunto de textos (no el lienzo) y las zonas están compactadas. El centro sigue vacío porque así es la composición de `orden.png`; se puede seguir ajustando `ANCHORS`.
+- **Banda académica:** los 7 textos AU están pensados para la variante B-long de 12 px. Si se quiere el efecto monumental de B (52 px), el lienzo y el layout tienen que crecer mucho y la vista inicial se aleja; es una decisión de diseño pendiente de validar.
 - **Textos largos:** si un texto crece en el Excel, hay que revisar que su altura siga entrando en la columna asignada y que no solape a los vecinos.
 - **Modo letra en textos muy largos:** el avance es continuo y vuelve al inicio; si se prefiere que se detenga en la última línea, es un cambio de una línea en `advanceLyric`.
 - **Pinch en distintos navegadores:** validar el caso `wheel + ctrlKey` y el comportamiento en Safari.
