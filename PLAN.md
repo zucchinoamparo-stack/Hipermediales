@@ -14,7 +14,7 @@ Los textos de música (`MU*`, `MA*`, `ML*`, `MM*`) tienen además un **modo letr
 - Carga los 22 textos del Excel `dataset.xlsx` (fuera del proyecto) distribuyendo cada uno en la zona temática de `orden.png`.
 - Las posiciones legibles se organizan alrededor de un **centro vacío** (`x` 900–1500, `y` 1050–1450): dentro de cada zona, el texto con número más bajo queda más cerca del centro. Los bloques se separan con **80–100 px de aire** y se verificó **0 solapamientos** en el layout legible.
 - Los textos `AU4`–`AU10` llegan como categoría B pero son largos: usan la variante **B-long** (Anton 12 px, mayúsculas) para poder leerse dentro del mapa sin agrandar el lienzo en exceso.
-- Los textos de una misma zona comparten el **mismo punto** en el layout superpuesto (decisión del usuario).
+- En el layout superpuesto, los textos de una misma zona se agrupan alrededor de su punto con **desplazamientos propios**: se ven como láminas que se pisan y no como un bloque macizo. La vista inicial abre encuadrando todo el conjunto (zoom ≈ 0.64 en 1440×900).
 - Dos layouts por texto (`overlap` y `readable`) interpolados por zoom.
 - Zoom con rueda y pinch de trackpad centrado en el cursor.
 - **Paneo con clic y arrastre** (1:1): mantenés el botón y la imagen sigue al cursor; al soltar, el cursor vuelve a enfocar textos.
@@ -41,7 +41,7 @@ Los textos de música (`MU*`, `MA*`, `ML*`, `MM*`) tienen además un **modo letr
 | Contenido | Excel `C:\Users\zucch\OneDrive\Documentos\Hipermediales\dataset.xlsx` |
 | Posiciones | Fijas, derivadas de las zonas de `orden.png` |
 | Zonas | academia (con banda AU), música universal, música argentina, música latinoamericana, literatura latinoamericana |
-| Textos de una misma zona | Se apilan en el mismo punto al alejar |
+| Textos de una misma zona | Se agrupan alrededor de su zona con desplazamientos propios y siguen pisándose al alejar |
 | Separación | Cada texto tiene posición “superpuesta” y “legible”; el zoom interpola entre ambas |
 | Zoom | Escala limitada + separación + atenuación del resto |
 | Navegación | Paneo con clic y arrastre + rueda/pinch para zoom; sin teclado ni doble clic |
@@ -77,7 +77,7 @@ Sin bundler, sin npm obligatorio. Servir con `python -m http.server` o Live Serv
 
 ### Cache y versionado
 
-`index.html` referencia los assets con `?v=N` (`styles.css?v=7`, `config.js?v=7`, etc.). Al modificar CSS o JS hay que subir ese número para que los navegadores no mezclen versiones viejas y nuevas. Mezclar un `app.js` nuevo con un `config.js` viejo puede producir valores `NaN` y congelar la vista; por eso además `app.js` define defaults para los parámetros nuevos y la cámara se autorresetea si detecta una transformación inválida.
+`index.html` referencia los assets con `?v=N` (`styles.css?v=8`, `config.js?v=8`, etc.). Al modificar CSS o JS hay que subir ese número para que los navegadores no mezclen versiones viejas y nuevas. Mezclar un `app.js` nuevo con un `config.js` viejo puede producir valores `NaN` y congelar la vista; por eso además `app.js` define defaults para los parámetros nuevos y la cámara se autorresetea si detecta una transformación inválida.
 
 ## Categorías tipográficas
 
@@ -115,17 +115,17 @@ El script:
    - `ML`, `MM` → música latinoamericana
    - `LL`, `L` → literatura latinoamericana
    - `A*` → academia
-6. Calcula el layout legible desde `READABLE` y el punto superpuesto desde `ANCHORS`.
+6. Calcula el layout legible desde `READABLE` y el punto de la vista inicial desde `OVERLAP` (con `ANCHORS` como respaldo por zona).
 7. Para los textos `M*`, construye `lines[]`: `/` separa versos y `//` separa estrofas; el resto conserva sus saltos de línea reales.
 8. Escribe `data/texts.js` con `window.TEXT_NETWORK`.
 
-Para mover un texto hay que editar `READABLE` (layout legible) o `ANCHORS` (punto de la zona) y volver a ejecutar el script. Conviene revisar que el layout legible siga sin solapamientos.
+Para mover un texto hay que editar `READABLE` (layout legible), `OVERLAP` (punto en la vista inicial) o `ANCHORS` (respaldo de zona) y volver a ejecutar el script. Conviene revisar que el layout legible siga sin solapamientos.
 
 ### Layout con los textos académicos nuevos
 
-- `AU4`–`AU10` comparten la zona **academia** y se apilan en el mismo punto al alejar, así que la vista inicial no cambia.
+- `AU4`–`AU10` comparten la zona **academia**; en la vista inicial se reparten en filas desplazadas (`OVERLAP`) para que se lean como láminas superpuestas y no como un bloque macizo.
 - El layout legible deja un **centro vacío** (`x` 900–1500, `y` 1050–1450) y ordena cada zona en espiral: el número más bajo queda más cerca de ese centro.
-- La banda académica ocupa la franja superior en **3 filas**: `AM1`–`AM3` en la fila interior, `AU4`–`AU7` en la del medio y `AU8`–`AU10` al fondo. En la vista inicial igual se superponen todos en el punto de academia.
+- La banda académica ocupa la franja superior en **3 filas**: `AM1`–`AM3` en la fila interior, `AU4`–`AU7` en la del medio y `AU8`–`AU10` al fondo. En la vista inicial se muestran como filas desplazadas que se superponen parcialmente.
 - Los bloques mantienen **80–100 px** de separación mínima entre sí.
 - Lienzo final: **2400×2300**. El contenido ocupa `x` 40–2360 e `y` 75–2193.
 - Verificado con **0 solapamientos** en `?layout=read`, centro vacío y sin errores en consola.

@@ -77,6 +77,40 @@ ANCHORS = {
     "literatura-latinoamericana": (1640, 1060 + Y_OFFSET),
 }
 
+# Punto de cada texto en la vista inicial. Comparten zona, pero con un
+# desplazamiento para que se vean como láminas superpuestas y no como un bloque
+# macizo: se distinguen los textos y a la vez siguen pisándose entre sí. La
+# cámara encuadra todos estos centros al abrir.
+OVERLAP = {
+    # Academia: AU en dos filas y AM en la fila inferior.
+    "AU9": {"x": 980, "y": 760},
+    "AU8": {"x": 1180, "y": 745},
+    "AU10": {"x": 1380, "y": 760},
+    "AU6": {"x": 950, "y": 935},
+    "AU4": {"x": 1180, "y": 915},
+    "AU5": {"x": 1410, "y": 935},
+    "AU7": {"x": 1640, "y": 920},
+    "AM1": {"x": 1070, "y": 1085},
+    "AM2": {"x": 1270, "y": 1100},
+    "AM3": {"x": 1480, "y": 1085},
+    # Música universal: columna escalonada a la izquierda.
+    "MU4": {"x": 240, "y": 1290},
+    "MU3": {"x": 240, "y": 1365},
+    "MU1": {"x": 240, "y": 1440},
+    "MU2": {"x": 240, "y": 1515},
+    # Música argentina: abanico abajo a la izquierda.
+    "MA5": {"x": 560, "y": 1640},
+    "MA1": {"x": 820, "y": 1600},
+    "MA3": {"x": 760, "y": 1740},
+    "MA2": {"x": 930, "y": 1700},
+    "MA4": {"x": 980, "y": 1850},
+    # Música latinoamericana: dos láminas al centro-derecha.
+    "ML1": {"x": 1330, "y": 1520},
+    "ML2": {"x": 1330, "y": 1680},
+    # Literatura: una sola lámina a la derecha.
+    "LL1": {"x": 1900, "y": 1420},
+}
+
 # Posición legible y ancho de cada texto. Los centros se eligieron para dejar
 # 80–100 px de aire entre bloques y un centro vacío; se verifican sin
 # solapamientos con ?layout=read.
@@ -190,6 +224,7 @@ def main():
         shape = READABLE[text_id]
         zone = zone_for(text_id)
         anchor = ANCHORS[zone]
+        start = OVERLAP.get(text_id, {})
         entry = {
             "id": text_id,
             "category": category if category in CATEGORIES else "A",
@@ -197,7 +232,10 @@ def main():
             "lyrics": is_lyrics(text_id),
             "width": shape["width"],
             "z": 10 + len(texts),
-            "overlap": {"x": anchor[0], "y": anchor[1]},
+            "overlap": {
+                "x": start.get("x", anchor[0]),
+                "y": start.get("y", anchor[1]),
+            },
             "readable": {"x": shape["x"], "y": shape["y"]},
             "content": content,
         }
