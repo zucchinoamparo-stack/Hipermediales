@@ -53,7 +53,7 @@ window.TEXT_NETWORK = {
       "z": 10,
       "overlap": {
         "x": 240,
-        "y": 1440
+        "y": 1404
       },
       "readable": {
         "x": 400,
@@ -86,7 +86,7 @@ window.TEXT_NETWORK = {
       "z": 11,
       "overlap": {
         "x": 240,
-        "y": 1515
+        "y": 1436
       },
       "readable": {
         "x": 400,
@@ -218,7 +218,7 @@ window.TEXT_NETWORK = {
       "z": 17,
       "overlap": {
         "x": 240,
-        "y": 1365
+        "y": 1372
       },
       "readable": {
         "x": 400,
@@ -249,7 +249,7 @@ window.TEXT_NETWORK = {
       "z": 18,
       "overlap": {
         "x": 240,
-        "y": 1290
+        "y": 1340
       },
       "readable": {
         "x": 400,

@@ -93,11 +93,12 @@ OVERLAP = {
     "AM1": {"x": 1070, "y": 1085},
     "AM2": {"x": 1270, "y": 1100},
     "AM3": {"x": 1480, "y": 1085},
-    # Música universal: columna escalonada a la izquierda.
-    "MU4": {"x": 240, "y": 1290},
-    "MU3": {"x": 240, "y": 1365},
-    "MU1": {"x": 240, "y": 1440},
-    "MU2": {"x": 240, "y": 1515},
+    # Música universal: columna compacta a la izquierda, con las láminas más
+    # pisadas que en el resto de las zonas.
+    "MU4": {"x": 240, "y": 1340},
+    "MU3": {"x": 240, "y": 1372},
+    "MU1": {"x": 240, "y": 1404},
+    "MU2": {"x": 240, "y": 1436},
     # Música argentina: abanico abajo a la izquierda.
     "MA5": {"x": 560, "y": 1640},
     "MA1": {"x": 820, "y": 1600},
