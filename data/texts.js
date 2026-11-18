@@ -52,8 +52,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 10,
       "overlap": {
-        "x": 240,
-        "y": 1404
+        "x": 320,
+        "y": 1274
       },
       "readable": {
         "x": 400,
@@ -85,8 +85,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 11,
       "overlap": {
-        "x": 240,
-        "y": 1436
+        "x": 320,
+        "y": 1311
       },
       "readable": {
         "x": 400,
@@ -118,8 +118,8 @@ window.TEXT_NETWORK = {
       "width": 420,
       "z": 12,
       "overlap": {
-        "x": 820,
-        "y": 1600
+        "x": 740,
+        "y": 1520
       },
       "readable": {
         "x": 1100,
@@ -217,8 +217,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 17,
       "overlap": {
-        "x": 240,
-        "y": 1372
+        "x": 320,
+        "y": 1237
       },
       "readable": {
         "x": 400,
@@ -248,8 +248,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 18,
       "overlap": {
-        "x": 240,
-        "y": 1340
+        "x": 320,
+        "y": 1200
       },
       "readable": {
         "x": 400,
@@ -276,8 +276,8 @@ window.TEXT_NETWORK = {
       "width": 420,
       "z": 19,
       "overlap": {
-        "x": 930,
-        "y": 1700
+        "x": 810,
+        "y": 1580
       },
       "readable": {
         "x": 1600,
@@ -335,8 +335,8 @@ window.TEXT_NETWORK = {
       "width": 420,
       "z": 20,
       "overlap": {
-        "x": 760,
-        "y": 1740
+        "x": 700,
+        "y": 1630
       },
       "readable": {
         "x": 1050,
@@ -370,8 +370,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 21,
       "overlap": {
-        "x": 1330,
-        "y": 1520
+        "x": 1150,
+        "y": 1500
       },
       "readable": {
         "x": 2090,
@@ -420,8 +420,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 22,
       "overlap": {
-        "x": 1330,
-        "y": 1680
+        "x": 1150,
+        "y": 1640
       },
       "readable": {
         "x": 2090,
@@ -454,8 +454,8 @@ window.TEXT_NETWORK = {
       "width": 420,
       "z": 23,
       "overlap": {
-        "x": 980,
-        "y": 1850
+        "x": 850,
+        "y": 1710
       },
       "readable": {
         "x": 1600,
@@ -487,8 +487,8 @@ window.TEXT_NETWORK = {
       "width": 460,
       "z": 24,
       "overlap": {
-        "x": 560,
-        "y": 1640
+        "x": 620,
+        "y": 1580
       },
       "readable": {
         "x": 480,

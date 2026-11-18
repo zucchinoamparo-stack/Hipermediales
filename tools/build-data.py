@@ -93,21 +93,19 @@ OVERLAP = {
     "AM1": {"x": 1070, "y": 1085},
     "AM2": {"x": 1270, "y": 1100},
     "AM3": {"x": 1480, "y": 1085},
-    # Música universal: columna compacta a la izquierda, con las láminas más
-    # pisadas que en el resto de las zonas.
-    "MU4": {"x": 240, "y": 1340},
-    "MU3": {"x": 240, "y": 1372},
-    "MU1": {"x": 240, "y": 1404},
-    "MU2": {"x": 240, "y": 1436},
-    # Música argentina: abanico abajo a la izquierda.
-    "MA5": {"x": 560, "y": 1640},
-    "MA1": {"x": 820, "y": 1600},
-    "MA3": {"x": 760, "y": 1740},
-    "MA2": {"x": 930, "y": 1700},
-    "MA4": {"x": 980, "y": 1850},
-    # Música latinoamericana: dos láminas al centro-derecha.
-    "ML1": {"x": 1330, "y": 1520},
-    "ML2": {"x": 1330, "y": 1680},
+    # Canciones de la izquierda (MU, MA y ML): un solo grupo compacto, con las
+    # zonas más cerca entre sí que en la primera versión.
+    "MU4": {"x": 320, "y": 1200},
+    "MU3": {"x": 320, "y": 1237},
+    "MU1": {"x": 320, "y": 1274},
+    "MU2": {"x": 320, "y": 1311},
+    "MA5": {"x": 620, "y": 1580},
+    "MA1": {"x": 740, "y": 1520},
+    "MA3": {"x": 700, "y": 1630},
+    "MA2": {"x": 810, "y": 1580},
+    "MA4": {"x": 850, "y": 1710},
+    "ML1": {"x": 1150, "y": 1500},
+    "ML2": {"x": 1150, "y": 1640},
     # Literatura: una sola lámina a la derecha.
     "LL1": {"x": 1900, "y": 1420},
 }
