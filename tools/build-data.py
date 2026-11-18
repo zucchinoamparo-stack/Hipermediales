@@ -44,7 +44,7 @@ CATEGORIES = {
         "fontWeight": 300,
         "lineHeight": 9.5,
         "letterSpacing": "0em",
-        "color": "#783030",
+        "color": "#a85050",
         "textTransform": "none",
     },
     # Variante legible de B para textos largos: conserva Anton en mayúsculas y
@@ -93,19 +93,19 @@ OVERLAP = {
     "AM1": {"x": 1070, "y": 1085},
     "AM2": {"x": 1270, "y": 1100},
     "AM3": {"x": 1480, "y": 1085},
-    # Canciones de la izquierda (MU, MA y ML): un solo grupo compacto, con las
-    # zonas más cerca entre sí que en la primera versión.
-    "MU4": {"x": 320, "y": 1200},
-    "MU3": {"x": 320, "y": 1237},
-    "MU1": {"x": 320, "y": 1274},
-    "MU2": {"x": 320, "y": 1311},
-    "MA5": {"x": 620, "y": 1580},
-    "MA1": {"x": 740, "y": 1520},
-    "MA3": {"x": 700, "y": 1630},
-    "MA2": {"x": 810, "y": 1580},
-    "MA4": {"x": 850, "y": 1710},
-    "ML1": {"x": 1150, "y": 1500},
-    "ML2": {"x": 1150, "y": 1640},
+    # Canciones de la izquierda (MU, MA y ML): un solo grupo apretado; las
+    # tres zonas se pisan entre sí y con la columna de MU.
+    "MU4": {"x": 420, "y": 1210},
+    "MU3": {"x": 420, "y": 1242},
+    "MU1": {"x": 420, "y": 1274},
+    "MU2": {"x": 420, "y": 1306},
+    "MA5": {"x": 640, "y": 1480},
+    "MA1": {"x": 760, "y": 1410},
+    "MA3": {"x": 700, "y": 1510},
+    "MA2": {"x": 820, "y": 1460},
+    "MA4": {"x": 880, "y": 1580},
+    "ML1": {"x": 1000, "y": 1420},
+    "ML2": {"x": 1000, "y": 1560},
     # Literatura: una sola lámina a la derecha.
     "LL1": {"x": 1900, "y": 1420},
 }

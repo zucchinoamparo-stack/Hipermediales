@@ -30,7 +30,7 @@ window.TEXT_NETWORK = {
       "fontWeight": 300,
       "lineHeight": 9.5,
       "letterSpacing": "0em",
-      "color": "#783030",
+      "color": "#a85050",
       "textTransform": "none"
     },
     "B-long": {
@@ -52,7 +52,7 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 10,
       "overlap": {
-        "x": 320,
+        "x": 420,
         "y": 1274
       },
       "readable": {
@@ -85,8 +85,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 11,
       "overlap": {
-        "x": 320,
-        "y": 1311
+        "x": 420,
+        "y": 1306
       },
       "readable": {
         "x": 400,
@@ -118,8 +118,8 @@ window.TEXT_NETWORK = {
       "width": 420,
       "z": 12,
       "overlap": {
-        "x": 740,
-        "y": 1520
+        "x": 760,
+        "y": 1410
       },
       "readable": {
         "x": 1100,
@@ -217,8 +217,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 17,
       "overlap": {
-        "x": 320,
-        "y": 1237
+        "x": 420,
+        "y": 1242
       },
       "readable": {
         "x": 400,
@@ -248,8 +248,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 18,
       "overlap": {
-        "x": 320,
-        "y": 1200
+        "x": 420,
+        "y": 1210
       },
       "readable": {
         "x": 400,
@@ -276,8 +276,8 @@ window.TEXT_NETWORK = {
       "width": 420,
       "z": 19,
       "overlap": {
-        "x": 810,
-        "y": 1580
+        "x": 820,
+        "y": 1460
       },
       "readable": {
         "x": 1600,
@@ -336,7 +336,7 @@ window.TEXT_NETWORK = {
       "z": 20,
       "overlap": {
         "x": 700,
-        "y": 1630
+        "y": 1510
       },
       "readable": {
         "x": 1050,
@@ -370,8 +370,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 21,
       "overlap": {
-        "x": 1150,
-        "y": 1500
+        "x": 1000,
+        "y": 1420
       },
       "readable": {
         "x": 2090,
@@ -420,8 +420,8 @@ window.TEXT_NETWORK = {
       "width": 400,
       "z": 22,
       "overlap": {
-        "x": 1150,
-        "y": 1640
+        "x": 1000,
+        "y": 1560
       },
       "readable": {
         "x": 2090,
@@ -454,8 +454,8 @@ window.TEXT_NETWORK = {
       "width": 420,
       "z": 23,
       "overlap": {
-        "x": 850,
-        "y": 1710
+        "x": 880,
+        "y": 1580
       },
       "readable": {
         "x": 1600,
@@ -487,8 +487,8 @@ window.TEXT_NETWORK = {
       "width": 460,
       "z": 24,
       "overlap": {
-        "x": 620,
-        "y": 1580
+        "x": 640,
+        "y": 1480
       },
       "readable": {
         "x": 480,

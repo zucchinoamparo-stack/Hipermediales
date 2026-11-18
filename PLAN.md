@@ -14,7 +14,7 @@ Los textos de música (`MU*`, `MA*`, `ML*`, `MM*`) tienen además un **modo letr
 - Carga los 22 textos del Excel `dataset.xlsx` (fuera del proyecto) distribuyendo cada uno en la zona temática de `orden.png`.
 - Las posiciones legibles se organizan alrededor de un **centro vacío** (`x` 900–1500, `y` 1050–1450): dentro de cada zona, el texto con número más bajo queda más cerca del centro. Los bloques se separan con **80–100 px de aire** y se verificó **0 solapamientos** en el layout legible.
 - Los textos `AU4`–`AU10` llegan como categoría B pero son largos: usan la variante **B-long** (Anton 12 px, mayúsculas) para poder leerse dentro del mapa sin agrandar el lienzo en exceso.
-- En el layout superpuesto, los textos de una misma zona se agrupan alrededor de su punto con **desplazamientos propios**: se ven como láminas que se pisan y no como un bloque macizo. La vista inicial abre encuadrando todo el conjunto (zoom ≈ 0.64 en 1440×900).
+- En el layout superpuesto, los textos de una misma zona se agrupan alrededor de su punto con **desplazamientos propios**: se ven como láminas que se pisan y no como un bloque macizo. La vista inicial abre encuadrando todo el conjunto (zoom ≈ 0.70 en 1440×900).
 - Dos layouts por texto (`overlap` y `readable`) interpolados por zoom.
 - Zoom con rueda y pinch de trackpad centrado en el cursor.
 - **Paneo con clic y arrastre** (1:1): mantenés el botón y la imagen sigue al cursor; al soltar, el cursor vuelve a enfocar textos.
@@ -86,7 +86,7 @@ Sin bundler, sin npm obligatorio. Servir con `python -m http.server` o Live Serv
 | A | Roboto Slab 400 | 8.5 / 8.5 px | `#efece3` | — |
 | B | Anton 400 | 52 / 51 px | `#f4f2ea` | mayúsculas, tracking −0.01em |
 | B-long | Anton 400 | 12 / 13 px | `#f4f2ea` | mayúsculas, tracking −0.01em |
-| C | Roboto Slab 300 | 8 / 9.5 px | `#783030` | — |
+| C | Roboto Slab 300 | 8 / 9.5 px | `#a85050` | — |
 
 La categoría B de 52 px queda reservada para titulares breves. Los textos B de más de 400 caracteres se generan como **B-long**: conservan Anton, mayúsculas y color, pero con un cuerpo legible dentro del mapa.
 
