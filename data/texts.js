@@ -2,7 +2,7 @@
 window.TEXT_NETWORK = {
   "design": {
     "width": 2400,
-    "height": 2000,
+    "height": 2300,
     "background": "#000000"
   },
   "categories": {
@@ -56,8 +56,8 @@ window.TEXT_NETWORK = {
         "y": 1480
       },
       "readable": {
-        "x": 230,
-        "y": 1180
+        "x": 400,
+        "y": 1220
       },
       "content": "If you are the dealer, I'm out of the game\nIf you are the healer, it means I'm broken and lame\nIf thine is the glory, then mine must be the shame\nYou want it darker\nWe kill the flame\nMagnified, sanctified\nBe the holy name\nVilified, crucified\nIn the human frame\nA million candles burning\nFor the help that never came\nYou want it darker\nHineni, hineni\nI'm ready, my Lord",
       "lines": [
@@ -89,8 +89,8 @@ window.TEXT_NETWORK = {
         "y": 1480
       },
       "readable": {
-        "x": 230,
-        "y": 1331
+        "x": 400,
+        "y": 1420
       },
       "content": "Pass me that lovely little gun/My dear, my darling one/The cleaners are coming, one by one/You don't even wanna let them start//They're knocking now upon your door/They measure the room, they know the score/They're mopping up the butcher's floor/Of your broken little hearts//Forgive us now for what we've done/It started out as a bit of fun/Here, take these before we run away/The keys to the gulag",
       "lines": [
@@ -122,8 +122,8 @@ window.TEXT_NETWORK = {
         "y": 1640
       },
       "readable": {
-        "x": 1170,
-        "y": 1779
+        "x": 1100,
+        "y": 1580
       },
       "content": "Te aprieto mucho\nTe empleo mucho\nTe sirvo mucho\nTe piso mucho\n(¿Cómo puede ser que te alboroten mis placeres?)\nTe espumo mucho\nTe asfixio mucho\nTe impacto mucho\nTe siento mucho\nYo te quisiera asaltar\nTe voy a atornillar\nTe voy a herir un poquito más",
       "lines": [
@@ -153,8 +153,8 @@ window.TEXT_NETWORK = {
         "y": 1000
       },
       "readable": {
-        "x": 610,
-        "y": 800
+        "x": 1010,
+        "y": 942
       },
       "content": "la resonancia no es solo un canal es un medio es la expresión de lo sensible, la prueba de que  las cosas están ahí  lo que se transmite en la vibracion por imitación, en la traslacion análoga y ¿perfecta? de las cosas y su pasaje por el cuerpo lleva a una armonia o a una compresión distinta de las cosas. podríamos decir que es en la resonancia que el sonido posee un cuerpo , posee de posesión, el fantasma que toma cuerpo para acercarse a nosotros para que lo podamos comprender, para hacerse escuchar. Necesita tomar otro cuerpo para poder ser oído."
     },
@@ -170,8 +170,8 @@ window.TEXT_NETWORK = {
         "y": 1000
       },
       "readable": {
-        "x": 1060,
-        "y": 815
+        "x": 1530,
+        "y": 876
       },
       "content": "Algo así aparece cuando se muere alguien cercano\nqueda resonando en nuestro alrededor\nmucho más cerca y presente que cuando vivía\nde repente está pegado a nosotros\nuna presencia constante y desconcertante\nes nuestro cuerpo el que lo resuena?\npor qué ese momento termina?\nserá que, como toda onda, al desaparecer la fuente esa energía se va disipando?\na más cercano el muerto\nmás fuerte su impacto en nosotros\nmás vibra desde nuestro cuerpo\nmás dura esa resonancia que nos rodea\nesa presencia\nque nunca se va del todo\npero pierde fuerza y forma\npasa de resonar a reverberar en el espacio\na ir perdiendo lentamente con cada rebote un poco de su forma original\na ir convirtiéndose en otra cosa\nque más tiene que ver con nosotros y el espacio en el que lo ponemos\nque con su fuente"
     },
@@ -180,15 +180,15 @@ window.TEXT_NETWORK = {
       "category": "C",
       "theme": "academia",
       "lyrics": false,
-      "width": 560,
+      "width": 520,
       "z": 15,
       "overlap": {
         "x": 1180,
         "y": 1000
       },
       "readable": {
-        "x": 1590,
-        "y": 800
+        "x": 2100,
+        "y": 890
       },
       "content": "El fetiche es originalmente un objeto de poderes ficticios. Su uso, tanto del término como del objeto, le ha ido confiriendo una amplia gama de poderes que van desde el de simple amuleto o talismán hasta poderes exclusivamente divinos. El fetiche no tiene fuerza por sí mismo, sólo es el soporte material que el hombre ha fijado en él mediante ritos y sustancias. El fetiche encarna una mezcla de magia, superstición y religiosidad. Muchas poblaciones nativas del África del oeste le llaman juju. (...) Estas figuras se utilizan para obtener la protección personal, de la familia y de los pueblos, alejar a los malos espíritus del poblado, atraer la lluvia, alejar las enfermedades, lograr la curación o como remedio terapéutico, entre otras muchas finalidades.”\nEl fetiche religioso, o sexual al que estamos acostumbrado es lo mismo, un crucifijo o una bombacha no tienen valor fetichista por su mero valor estético, porque es de marmol o de plástico o de encaje, sino porque con nuestro deseo hacemos que encarnen el sacrificio de jesucristo, su dolor, la tortura o la fuente principal de los placeres sexuales.\nLos materiales son esenciales para el fetiche y la  biografía de los objetos y la persona que los elige es lo que los designa como tal.\nEn la novela Crash de Ballard seguimos la historia de un grupo de fetichistas cuya obsesión gira alrededor de los autos, y en particular los choques de autos. En la novela los materiales del auto, la palanca de cambios, el parabrisas roto, la chapa abollada, el tapizado de los asientos y las secuelas físicas de los accidentes son el material que encarna los deseos sexuales de los personajes. Pero no esta no es una simple elección estética, el auto se convierte en el fetiche despues de vivir en carne propia un accidente\n¨ La posición de las manos en el volante y el acelerador, los dedos enfermizos que se volvían apuntando a los pechos, eran elementos de un rito masturbatorio estilizado. La cara enérgica de ángulos desencajados parecía parodiar los tableros deformados del coche, como si supiera que estos instrumentos retorcidos apuntaban a una accesible antología de depravaciones, claves de una vertiginosa sexualidad. ¨ (pag. 118, minotauro, 1984)"
     },
@@ -204,8 +204,8 @@ window.TEXT_NETWORK = {
         "y": 1660
       },
       "readable": {
-        "x": 2110,
-        "y": 1530
+        "x": 2100,
+        "y": 1200
       },
       "content": "La hija del diablo se casa. No sabíamos si ir o no ir. En casa resolvieron no ir. Ella paseaba con la trenza brillando como un vidrio al sol. Vestido celeste. Y las pezuñas delicadísimas, cinceladas y de platino. Con los ojos un poco redondos, insondables, se paraba frente a cada uno, como publicitando, invitando, o, consciente e inconscientemente, amenazando. La hija del diablo se casa. Cerraron las puertas de mi casa. Pasado el mediodía resolví huir. Crucé por arriba de los jardines de fresias y junquillos tratando de no trozar ni uno de los ramos amarillos, de los que vivíamos; por ocultas veredas; creo que hice tres veces la misma senda, me perdía, y tuve miedo que, desde la casa, estuviesen espiando mi inútil vuelo.\n\n¡Al fin toqué las puertas de los hornos! Pasaban platos con todas las escenas del amor erótico. 'Invitan con la Carne', dijo una voz que me pareció de una vecina; miré y, si era, estaba embozada. Y también servían niños no natos, cubiertos con azúcar. 'Son riquísimos'. El tam tam celebratorio apareció adentro de la tierra y en un perpetuo crescendo, anuló las conversaciones y llegó al colmo. La hija del diablo, de pie junto a la pared, el pelo igual que el sol, entreabrió el vestido, las piernas, las pezuñas. Su himen cayó roto (se oyó un leve bramido) y corrió como una margarita entre nosotros. Alguien gritó: -¿Y el novio? -Se va por aquí. Es chiquitito.\n\nCerré los ojos. Creo que cayó un aguacero. Huí arriba de los jardines, de los ramos amarillos; entraba en cada cueva y salía aterrada. Entré en mi casa. Mamá estaba fija en el mismo lugar, haciendo el mismo encaje. Sin levantar los ojos, comentó: -Pero, ¿qué haces? Andas por el jardín con estos aguaceros."
     },
@@ -221,8 +221,8 @@ window.TEXT_NETWORK = {
         "y": 1480
       },
       "readable": {
-        "x": 230,
-        "y": 1474
+        "x": 400,
+        "y": 1030
       },
       "content": "You only see what your eyes want to see\nHow can life be what you want it to be?\nYou're frozen\nWhen your heart's not open\nYou're so consumed with how much you get\nYou waste your time with hate and regret\nYou're broken\nWhen your heart's not open\nIf I could melt your heart\nWe'd never be apart\nGive yourself to me\nYou hold the key",
       "lines": [
@@ -252,8 +252,8 @@ window.TEXT_NETWORK = {
         "y": 1480
       },
       "readable": {
-        "x": 230,
-        "y": 1595
+        "x": 400,
+        "y": 860
       },
       "content": "I'm gonna tell you about love\nLet's forget your life\nForget your problems\nAdministration, bills and loads\nCome with me\nIn the demonstration of this evidence\nSome have called it religion\nThis is not a coincidence\nWould you like to try?",
       "lines": [
@@ -280,8 +280,8 @@ window.TEXT_NETWORK = {
         "y": 1640
       },
       "readable": {
-        "x": 1170,
-        "y": 1203
+        "x": 1600,
+        "y": 1700
       },
       "content": "Cuando te despiertes cada día\nCon el cuerpo de aire y ese olor\nFeliz del sueño manso de las lilas\nSin miedo al movimiento ni al dolor\n\nCuando yo no tenga casi nada\nDe sangre en la garganta de papel\nNi un agrio pez nadando en la mirada\nNi quiera más amparo que la piel\n\nVan a ser los días esos barcos\nDe luz que una vez pude escribir\nY la alegría que hemos olvidado\nVolviendo por los huesos a subir\n\nYo me alimento con una quimera\nEn que los ojos al sol verán brillar\nLos brazos de mi padre en las banderas\nY una ceniza negra, y una ceniza negra\nY una ceniza negra que se va\n\nCuando me convenza que la suerte\nMe rige a la par que la pasión\nY no el temible arcángel de la muerte\nVelando sobre el campo del reloj\n\nSi lo consumado y lo posible\nTienen siempre la cara del horror\nEn esta patria de lo inaccesible\nEn este tiempo olvidado de dios\n\nYo digo que mis ávidos amores\nSon fuertes y viven más que yo\nSon gigantes tenues como flores\nQue alientan este turbio corazón\nLos alimento con una quimera\nEn que los ojos al sol verán brillar\nLos brazos de mi padre en las banderas\nY una ceniza negra, y una ceniza negra\nY una ceniza negra que se va",
       "lines": [
@@ -339,8 +339,8 @@ window.TEXT_NETWORK = {
         "y": 1640
       },
       "readable": {
-        "x": 1170,
-        "y": 1476
+        "x": 1050,
+        "y": 1850
       },
       "content": "El que te ama no te nombra\nCorazón de luz y sombra\nEl que te ama no te nombra\nCorazón de luz y sombra\nNo tengo palabras para enamorarte\nNi quiero que te abras en dos para amarte\nHoy estoy oscuro como un pan de tierra\nViviendo por puro azar, como en la guerra\nCantan los idiotas, los hijos del sueño\nYo canto en mi propia parte del infierno\nLa enumeración que no tiene sentido\nQue te dice toda mientras no te digo\nEl que te ama no te nombra\nCorazón de luz y sombra\nEl que te ama no te nombra\nCorazón de luz y sombra",
       "lines": [
@@ -374,8 +374,8 @@ window.TEXT_NETWORK = {
         "y": 1560
       },
       "readable": {
-        "x": 1600,
-        "y": 1220
+        "x": 2090,
+        "y": 1550
       },
       "content": "Tudo era apenas uma brincadeira\nE foi crescendo, crescendo, me absorvendo\nE de repente eu me vi assim completamente seu\nVi a minha força amarrada no seu passo\nVi que sem você não há caminho, eu não me acho\nVi um grande amor gritar dentro de mim\nComo eu sonhei um dia\n\nQuando o meu mundo era mais mundo\nE todo mundo admitia\nUma mudança muito estranha\nMais pureza, mais carinho mais calma, mais alegria\nNo meu jeito de me dar\n\nQuando a canção se fez mais clara e mais sentida\nQuando a poesia realmente fez folia em minha vida\nVocê veio me falar dessa paixão inesperada\nPor outra pessoa\n\nMas não tem revolta não\nEu só quero que você se encontre\nSaudade até que é bom\nÉ melhor que caminhar vazio\nA esperança é um dom\nQue eu tenho em mim, eu tenho sim\n\nNão tem desespero não\nVocê me ensinou milhões de coisas\nTenho um sonho em minhas mãos\nAmanhã será um novo dia\nCertamente eu vou ser mais feliz",
       "lines": [
@@ -424,8 +424,8 @@ window.TEXT_NETWORK = {
         "y": 1560
       },
       "readable": {
-        "x": 1600,
-        "y": 1449
+        "x": 2090,
+        "y": 1850
       },
       "content": "Everybody knows that our cities were built to be destroyed\nEverybody knows that our cities were built to be destroyed\nYou get annoyed, you buy a flat, you hide behind the mat\nBut I know she was born to do everything wrong whith all of that\nBut I know she was born to do everything wrong whith all of that\nMaria Bethânia, please send me a letter\nI wish to know things are getting better\nBetter, better, Beta, Beta, Bethânia\nPlease, send me a letter\nI wish to know things are getting better\nShe has given her soul to the devil but the devil gave his soul to God\nShe has given her soul to the devil but the devil gave his soul to God\nBefore the flood, after the blood, before you can see\nShe has given her soul to the devil and bought a flat by the sea\nShe has given her soul to the devil and bought a flat by the sea",
       "lines": [
@@ -458,8 +458,8 @@ window.TEXT_NETWORK = {
         "y": 1640
       },
       "readable": {
-        "x": 1170,
-        "y": 1636
+        "x": 1600,
+        "y": 2010
       },
       "content": "Agente y apoderada\nMuchacha audaz, no tienes paz\nBonita y acaudalada\nRosada y social, receta magistral\nDe turno está, con tiempo para gastar\nConsume desenfrenada\nLas muñecas dan tranquilidad\nBuscando la madrugada\nClimatizada, conduce la tempestad\nPor la ruta panorámica\nTóxica (tóxica)\nPrincesa de la química\nTóxica (tóxica)\nSuperacción, la solución",
       "lines": [
@@ -491,8 +491,8 @@ window.TEXT_NETWORK = {
         "y": 1640
       },
       "readable": {
-        "x": 700,
-        "y": 1480
+        "x": 480,
+        "y": 1900
       },
       "content": "Ponme un aro en el cuello\nDoblégame a beber\nDe tu dopa-oreja dopamina\nLacérame la piel para que al renacer\nTenga el olor preferido tuyo\nCaudaloso por mis venas el hechizo siento arder\nSubyugado a tu tesoro caigo al agua del placer\n\nCondéname a sentir\nTu angustia peor\nDefendiéndome de tu egoísmo\nQue si vuelvo a morir\nY vuelvo a renacer\nYo te elijo para las siete vidas\nDios nos hace sentir culpas por lo que no hacemos bien\nMientras ruedo en el relajo convencido muerto rey\n\nAceptaré tu condición\nMe debilito sin tu esencia\nMi propia invención me tendió una trampa\nPienso en escapar peligra mi alma\nMiro hacia el oeste y no hay poniente es falso\n\nIntégrame a tu ley\nCompartime el harén\nBaila mi cerebro\nDesde tu vientre\nImagino tu gracia\nMe quiero incorporar\nPero el esfuerzo me desvanece\nFui bañado en la inocencia de un signo zodiacal\nProtegido por urracas donde cunde el matorral\n\nEmbríagame con sangre en privado sabbat\nConteneme mientras hablo lenguas\nSi voy por la cornisa\nNo acepto perder pie\nNo me empujes hacia tu precipicio\nMe rodeaste de fetiches\nY de objetos de poder\nLa ciencia de tu estrategia me demuestra muerto rey\n\nEl diablo es adulador y te perdona los errores\nMiente y me complace hasta ganar mi fe\nPoco a poco es dueño de mi fiel confianza\nMiro donde miro nunca hay poniente es falso\n\nSolo hay una niña que ha caído al fondo\nDe la garganta del mismo diablo\nNada la rescata ni la recuperará\nVive presa de un embrujo alado\n\nEl diablo es adulador y te perdona los errores\nMiente y te complace hasta ganar a tu fe\nPoco a poco es dueño de tu fiel confianza\nMires donde mires nunca hay poniente es falso\n\nEl diablo es adulador\nY te perdona, y te perdona\nMiente y te complace hasta ganar tu fe\nPoco a poco es dueño de tu fiel confianza\nMires donde mires nunca hay poniente es falso\nSolo hay superficie\n\nEl diablo es adulador y te perdona los errores\nMiente y te complace hasta ganar a tu fe\nPoco a poco es dueño de tu fiel confianza\nMires donde mires nunca hay poniente es falso\nEl diablo es falso",
       "lines": [
@@ -572,15 +572,15 @@ window.TEXT_NETWORK = {
       "category": "B-long",
       "theme": "academia",
       "lyrics": false,
-      "width": 560,
+      "width": 520,
       "z": 25,
       "overlap": {
         "x": 1180,
         "y": 1000
       },
       "readable": {
-        "x": 300,
-        "y": 170
+        "x": 900,
+        "y": 597
       },
       "content": "Según Walter Benjamin, la cámara cinematográfica permite acceder a una\nforma especial del inconsciente. Lo llama «inconsciente óptico». Los primeros\nplanos o la cámara lenta harían visibles los micromovimientos y las microacciones\nque escapan al ojo humano. Sacarían a la luz un espacio inconsciente: «Solo\naprendemos sobre el inconsciente óptico a través de ella [la cámara], como\naprendemos sobre el inconsciente instintivo a través del psicoanálisis».[11] Las\nideas de Benjamin sobre el inconsciente óptico pueden trasladarse al régimen de\nla información. El big data y la inteligencia artificial son como una lupa digital\nque descubre el inconsciente oculto del agente tras el espacio consciente de la\nacción. Por analogía con el inconsciente óptico, podemos llamarlo inconsciente\ndigital. El big data y la inteligencia artificial ponen al régimen de la información\nen condiciones de influir en nuestro comportamiento por debajo del umbral de la\nconciencia. El régimen de la información se apodera de esas capas prerreflexivas,\ninstintivas y emotivas del comportamiento que van por delante de las acciones\nconscientes. Su psicopolítica basada en datos interviene en nuestro\ncomportamiento sin que seamos conscientes de ello."
     },
@@ -589,15 +589,15 @@ window.TEXT_NETWORK = {
       "category": "B-long",
       "theme": "academia",
       "lyrics": false,
-      "width": 560,
+      "width": 520,
       "z": 26,
       "overlap": {
         "x": 1180,
         "y": 1000
       },
       "readable": {
-        "x": 900,
-        "y": 170
+        "x": 1500,
+        "y": 545
       },
       "content": "El problema de las iglesias es exactamente el mismo: todos los participantes deben\npresenciar el sacrificio de la misa y servir de audiencia a la palabra del\nsacerdote. Actualmente, continúa Giulius, el problema fundamental\npara la arquitectura moderna es exactamente el inverso. Se trata de\nhacer que el mayor número de personas pueda ser ofrecido como\nespectáculo a un solo individuo encargado de vigilarlas.»\nAl escribir esto Giulius estaba pensando en el Panóptico, de Bent\nham y, en términos generales, en la arquitectura de las prisiones, los\nhospitales, las escuelas, etc. Se refería al problema de cómo lograr no\nuna arquitectura del espectáculo como la griega, sino una arquitectura\nde la vigilancia, que haga posible que una única mirada pueda recorrer\nel mayor número de rostros, cuerpos, actitudes, la mayor cantidad\nposible de celdas. «Ahora bien, dice Giulius, el surgimiento de este\nproblema arquitectónico es un correlato de la desaparición de una\nsociedad que vivía en comunidad espiritual y religiosa y la aparición de\nuna sociedad estatal. El Estado se presenta como una cierta disposición\nespacial y social de los individuos, en la que todos están sometidos a\nuna única vigilancia.» Al concluir su explicación sobre estos dos tipos\nde arquitectura Giulius afirma que no se trata de un simple problema\narquitectónico sino que esta diferencia es fundamental en la historia\ndel espíritu humano.\nGiulius no fue el único que percibió en su tiempo este fenómeno\nde inversión del espectáculo en vigilancia o de nacimiento de una\nsociedad panóptica."
     },
@@ -606,15 +606,15 @@ window.TEXT_NETWORK = {
       "category": "B-long",
       "theme": "academia",
       "lyrics": false,
-      "width": 560,
+      "width": 520,
       "z": 27,
       "overlap": {
         "x": 1180,
         "y": 1000
       },
       "readable": {
-        "x": 1500,
-        "y": 170
+        "x": 300,
+        "y": 571
       },
       "content": "So the reason for the book title, is that when it comes to computers, people look\nat them, see what they can do, and imagine all sorts of things that must be in\nthese machines. Or they imagine all sorts of principles that they must be based\non, and therefore what they may be capable of. People may assign human\nqualities to the machine. And more than a few find themselves in situations\nwhere they feel that they are embarrassing themselves, like our friend in the\njoke, Joe.\nBut computers are actually quite easy to understand. Of course computers have a\ngreater number of parts than a Thermos bottle, but each part is extremely simple,\nand they all operate on a very simple, very easy to understand principle.\nWith the Thermos, the principle is that of the motion of heat. This is something\nwe can observe in life. We see ice cubes melting when they are removed from\nthe freezer, and we see the hot meal cooling off on the table when the family is\nlate for dinner.\nIn the computer, the principle on which it operates has to do with electricity, but\nthat doesn't mean that it is hard to understand. If you have observed the fact that\nwhen you turn on a light switch, a light bulb lights up, and when you turn the\nswitch off, the light goes dark, then you have observed the principle on which\ncomputers operate. That is about all you need to know about electricity to\nunderstand computers."
     },
@@ -623,7 +623,7 @@ window.TEXT_NETWORK = {
       "category": "B-long",
       "theme": "academia",
       "lyrics": false,
-      "width": 560,
+      "width": 520,
       "z": 28,
       "overlap": {
         "x": 1180,
@@ -631,7 +631,7 @@ window.TEXT_NETWORK = {
       },
       "readable": {
         "x": 2100,
-        "y": 170
+        "y": 578
       },
       "content": "Freud’s description of the uncanny as eerie or frightening, the unhomely\nsensations arising from that which is unfamiliar and uncertain, particularly\nwhen they are once familiar feelings that have become secret or repressed,\nextended to the uncanny nature of silence and darkness. Inconclusively,\nat the end of his famous essay, he attributed this to infantile anxieties that\nnone of us fully overcome. Such fears may be childish, but they are rooted\nin very deep memories of unknown sounds and eerie silences overheard\nin the dark. Perhaps this returns us once again to the womb, fl oating in\ndarkness, eavesdropping on mysterious sounds from the unknown world\noutside. These anxieties are not easily overcome, so when a writer or\ndirector needs to evoke atmospheres, administer shocks or summon the\nuncanny, sound is powerful in its capacity to disturb, to unsettle and install\ndread.\nJust as a silent reader is implicitly a containment of sounds, so the letter\nitself, the silent speaker, can become a listener. ‘The door was shut; and to\nsuppose that wood, when it creaks, transmits anything save that rats are\nbusy and wood dry is childish’, wrote Virginia Woolf in Jacob’s Room. And\nyet, a letter, personifi ed as Jacob’s mother, sits waiting on the hall table,\neavesdropping on the faint sounds of her son (his unthinkable sexuality),"
     },
@@ -640,15 +640,15 @@ window.TEXT_NETWORK = {
       "category": "B-long",
       "theme": "academia",
       "lyrics": false,
-      "width": 560,
+      "width": 520,
       "z": 29,
       "overlap": {
         "x": 1180,
         "y": 1000
       },
       "readable": {
-        "x": 300,
-        "y": 460
+        "x": 1200,
+        "y": 218
       },
       "content": "Sinister Resonance begins with the premise that sound is a haunting,\na ghost, a presence whose location in space is ambiguous and whose\nexistence in time is transitory. The intangibility of sound is uncanny — a\nphenomenal presence both in the head, at its point of source and all around\n— so never entirely distinct from auditory hallucinations. The close listener\nis like a medium who draws out substance from that which is not entirely\nthere. Listening, after all, is always a form of eavesdropping\nBecause sound vanishes into air and past time, the history of listening\nmust be constructed from the narratives of myth and fi ction, ‘silent’ arts\nsuch as painting, the resonance of architecture, auditory artefacts and\nnature. In such contexts, sound often functions as a metaphor for mysti\ncal revelation, instability, forbidden desires, disorder, formlessness, the\nsupernatural, for the breaking of social taboos, the unknown, unconscious\nand extra- human."
     },
@@ -657,15 +657,15 @@ window.TEXT_NETWORK = {
       "category": "B-long",
       "theme": "academia",
       "lyrics": false,
-      "width": 560,
+      "width": 520,
       "z": 30,
       "overlap": {
         "x": 1180,
         "y": 1000
       },
       "readable": {
-        "x": 900,
-        "y": 460
+        "x": 600,
+        "y": 212
       },
       "content": "Are the mind and its experiences only the brain? Is the mind limited to the\nbody? Mainstream neuroscience assumes the affirmative to both questions,\nbut the only evidence for that position is that changes in the brain can\naffect experience and behavior, and vice versa. To take such two-way inter\nactions as a brain monism depends on a scientific materialist metaphysics,\nnot on science itself. It also depends on the assumption that we now know\neverything basic that there is to know about matter and living bodies. And\nfinally it assumes that there is no faculty of knowing beyond the dualistic\nmind of samsara and phase 1 enaction.\nEvidence contrary to these assumptions has been slowly accumulating\nfor the past century. Best known by Westerners are the alternative physiolo\ngies offered by the yogic (and Asian medical) views of the body in which\nthe body is regarded as a pattern of energy. The energy channels described\nin these systems do not correspond to the nervous system of Western\nphysiology"
     },
@@ -674,15 +674,15 @@ window.TEXT_NETWORK = {
       "category": "B-long",
       "theme": "academia",
       "lyrics": false,
-      "width": 560,
+      "width": 520,
       "z": 31,
       "overlap": {
         "x": 1180,
         "y": 1000
       },
       "readable": {
-        "x": 1500,
-        "y": 460
+        "x": 1800,
+        "y": 192
       },
       "content": "\"Se llama mi Genius, porque mehaengendrado (Genius\nmeus nominatur, quia megenuit).\" Pero eso no basta. Genius\nno era solamente la personificación de la energía sexual. Cier\ntamente cada ser humano varón tenía su propio Genius y\ncada mujer tenía suJuno, ambosmanifestacionesdela fecun\ndidad que genera y perpetúa la vida. Pero, como es evidente\nen el rérmino ingenium, que designa lasumadelas cualidades\nfísicas y morales innatas en aquel que comienzaa ser, Genius\nera de alguna manera la divinización de lapersona, el princi\npio que rige y expresa todasuexisrencia. Por esto a Genius era\nconsagrada la frente, no el pubis; y el gesto de llevarnos la\nmano a la frente, que hacemos casi sin darnos cuenta en los\nmomentos de desconcierto, cuando nos parece casi que nos\nhemos olvidado de nosotros mismos, recuerdael gesto ritual\ndel culto de Genius (unde venerantes deum tangimusfontem).\ny dado que este dios es, en cierto sentido, el más íntimo y\npropio, es necesario aplacarlo y mantenerlo propicio en todos\nlos aspectos y en todos los momentos de la vida."
     }

@@ -12,7 +12,7 @@ Los textos de música (`MU*`, `MA*`, `ML*`, `MM*`) tienen además un **modo letr
 
 - Archivos: `index.html`, `styles.css`, `config.js`, `data/texts.js`, `js/app.js`, `tools/build-data.py`.
 - Carga los 22 textos del Excel `dataset.xlsx` (fuera del proyecto) distribuyendo cada uno en la zona temática de `orden.png`.
-- Las posiciones legibles están empaquetadas a mano en una **banda académica superior** (7 textos AU en 4 columnas), 4 columnas para música, la fila de academia original y la columna de literatura; se verificó **0 solapamientos** en el layout legible.
+- Las posiciones legibles se organizan alrededor de un **centro vacío** (`x` 900–1500, `y` 1050–1450): dentro de cada zona, el texto con número más bajo queda más cerca del centro. Los bloques se separan con **80–100 px de aire** y se verificó **0 solapamientos** en el layout legible.
 - Los textos `AU4`–`AU10` llegan como categoría B pero son largos: usan la variante **B-long** (Anton 12 px, mayúsculas) para poder leerse dentro del mapa sin agrandar el lienzo en exceso.
 - Los textos de una misma zona comparten el **mismo punto** en el layout superpuesto (decisión del usuario).
 - Dos layouts por texto (`overlap` y `readable`) interpolados por zoom.
@@ -31,7 +31,7 @@ Los textos de música (`MU*`, `MA*`, `ML*`, `MM*`) tienen además un **modo letr
 - `?layout=read`: fuerza el layout legible completo.
 - `?layout=overlap`: fuerza el layout superpuesto.
 - `?zoom=1.6&x=760&y=760`: abre en un punto (coordenadas de mundo) y zoom determinados.
-- `?zoom=1.45&x=700&y=880&focus=MA5`: abre enfocando un texto concreto.
+- `?zoom=1.45&x=480&y=1900&focus=MA5`: abre enfocando un texto concreto.
 
 ## Decisiones ya tomadas
 
@@ -48,7 +48,7 @@ Los textos de música (`MU*`, `MA*`, `ML*`, `MM*`) tienen además un **modo letr
 | Trackpad | Solo pinch hace zoom; dos dedos sin pinch no desplazan |
 | Foco | Por proximidad al cursor |
 | Vista inicial | Red completa, textos superpuestos |
-| Adaptación | Lienzo fijo 2400×2000 escalado a la ventana |
+| Adaptación | Lienzo fijo 2400×2300 escalado a la ventana |
 | Textos largos | Se leen completos en el mapa, sin panel |
 | Estilo | Categorías con tipografía y color propios, según Figma |
 | Fuentes | Google Fonts descargadas y servidas localmente |
@@ -77,7 +77,7 @@ Sin bundler, sin npm obligatorio. Servir con `python -m http.server` o Live Serv
 
 ### Cache y versionado
 
-`index.html` referencia los assets con `?v=N` (`styles.css?v=6`, `config.js?v=6`, etc.). Al modificar CSS o JS hay que subir ese número para que los navegadores no mezclen versiones viejas y nuevas. Mezclar un `app.js` nuevo con un `config.js` viejo puede producir valores `NaN` y congelar la vista; por eso además `app.js` define defaults para los parámetros nuevos y la cámara se autorresetea si detecta una transformación inválida.
+`index.html` referencia los assets con `?v=N` (`styles.css?v=7`, `config.js?v=7`, etc.). Al modificar CSS o JS hay que subir ese número para que los navegadores no mezclen versiones viejas y nuevas. Mezclar un `app.js` nuevo con un `config.js` viejo puede producir valores `NaN` y congelar la vista; por eso además `app.js` define defaults para los parámetros nuevos y la cámara se autorresetea si detecta una transformación inválida.
 
 ## Categorías tipográficas
 
@@ -123,16 +123,18 @@ Para mover un texto hay que editar `READABLE` (layout legible) o `ANCHORS` (punt
 
 ### Layout con los textos académicos nuevos
 
-- `AU4`–`AU10` comparten la zona **academia** y se apilan en el mismo punto al alejar.
-- Para que entren legibles sin romper la composición, la franja superior del lienzo se reserva para una banda de **4 columnas × 2 filas**; el resto del mapa baja `Y_OFFSET = 600` px.
-- Lienzo final: **2400×2000**. La banda AU ocupa `y` 14–577 y el contenido original queda en `y` 718–1830.
-- Verificado con **0 solapamientos** en `?layout=read` y sin errores en consola.
+- `AU4`–`AU10` comparten la zona **academia** y se apilan en el mismo punto al alejar, así que la vista inicial no cambia.
+- El layout legible deja un **centro vacío** (`x` 900–1500, `y` 1050–1450) y ordena cada zona en espiral: el número más bajo queda más cerca de ese centro.
+- La banda académica ocupa la franja superior en **3 filas**: `AM1`–`AM3` en la fila interior, `AU4`–`AU7` en la del medio y `AU8`–`AU10` al fondo. En la vista inicial igual se superponen todos en el punto de academia.
+- Los bloques mantienen **80–100 px** de separación mínima entre sí.
+- Lienzo final: **2400×2300**. El contenido ocupa `x` 40–2360 e `y` 75–2193.
+- Verificado con **0 solapamientos** en `?layout=read`, centro vacío y sin errores en consola.
 
 ## Modelo de datos
 
 ```js
 window.TEXT_NETWORK = {
-  design: { width: 2400, height: 2000, background: "#000000" },
+  design: { width: 2400, height: 2300, background: "#000000" },
   categories: {
     A: {
       fontFamily: "'Roboto Slab', Rockwell, serif",
@@ -273,7 +275,7 @@ Panel de desarrollo:
 ## Riesgos y puntos abiertos
 
 - **Ventana de letra y foco:** la ventana de 7 líneas cambia la altura visual del texto pero el foco usa la altura cacheada antes del modo letra; si se ajusta el tamaño de la ventana, revisar que el radio de foco siga seleccionando el texto correcto.
-- **Densidad de la página:** la vista inicial ahora encuadra el conjunto de textos (no el lienzo) y las zonas están compactadas. El centro sigue vacío porque así es la composición de `orden.png`; se puede seguir ajustando `ANCHORS`.
+- **Densidad de la página:** la vista inicial encuadra el conjunto de textos (no el lienzo) y las zonas están compactadas. El layout legible deja un centro vacío fijo (`x` 900–1500, `y` 1050–1450) y ordena los textos por número alrededor de él; se puede seguir ajustando `READABLE` y `ANCHORS`.
 - **Banda académica:** los 7 textos AU están pensados para la variante B-long de 12 px. Si se quiere el efecto monumental de B (52 px), el lienzo y el layout tienen que crecer mucho y la vista inicial se aleja; es una decisión de diseño pendiente de validar.
 - **Textos largos:** si un texto crece en el Excel, hay que revisar que su altura siga entrando en la columna asignada y que no solape a los vecinos.
 - **Modo letra en textos muy largos:** el avance es continuo y vuelve al inicio; si se prefiere que se detenga en la última línea, es un cambio de una línea en `advanceLyric`.

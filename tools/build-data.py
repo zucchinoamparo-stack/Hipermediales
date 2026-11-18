@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DEST = ROOT / "data" / "texts.js"
 DEFAULT_SOURCE = Path(r"C:\Users\zucch\OneDrive\Documentos\Hipermediales\dataset.xlsx")
 
-DESIGN = {"width": 2400, "height": 2000, "background": "#000000"}
+DESIGN = {"width": 2400, "height": 2300, "background": "#000000"}
 
 CATEGORIES = {
     "A": {
@@ -64,10 +64,10 @@ CATEGORIES = {
 # variante legible; los B breves conservan el cuerpo display de 52 px.
 B_LONG_THRESHOLD = 400
 
-# Distribución de zonas tomada de orden.png y compactada para que la vista
-# general llene el cuadro: academia arriba al centro, músicas abajo a la
-# izquierda y literatura a la derecha. La banda académica nueva ocupa la
-# franja superior, por eso el resto de la composición baja 600 px.
+# Distribución de zonas tomada de orden.png: academia arriba al centro, música
+# a la izquierda y abajo, literatura a la derecha. En el centro queda un
+# rectángulo vacío (x 900–1500, y 1050–1450) alrededor del cual se ordenan los
+# textos: dentro de cada zona, el número más bajo queda más cerca del centro.
 Y_OFFSET = 600
 ANCHORS = {
     "academia": (1180, 400 + Y_OFFSET),
@@ -77,31 +77,37 @@ ANCHORS = {
     "literatura-latinoamericana": (1640, 1060 + Y_OFFSET),
 }
 
-# Posición legible y ancho de cada texto (se verifican sin solapamientos).
+# Posición legible y ancho de cada texto. Los centros se eligieron para dejar
+# 80–100 px de aire entre bloques y un centro vacío; se verifican sin
+# solapamientos con ?layout=read.
 READABLE = {
-    "AM1": {"x": 610, "y": 200 + Y_OFFSET, "width": 420},
-    "AM2": {"x": 1060, "y": 215 + Y_OFFSET, "width": 420},
-    "AM3": {"x": 1590, "y": 200 + Y_OFFSET, "width": 560},
-    "MU1": {"x": 230, "y": 580 + Y_OFFSET, "width": 400},
-    "MU2": {"x": 230, "y": 731 + Y_OFFSET, "width": 400},
-    "MU3": {"x": 230, "y": 874 + Y_OFFSET, "width": 400},
-    "MU4": {"x": 230, "y": 995 + Y_OFFSET, "width": 400},
-    "MA5": {"x": 700, "y": 880 + Y_OFFSET, "width": 460},
-    "MA1": {"x": 1170, "y": 1179 + Y_OFFSET, "width": 420},
-    "MA2": {"x": 1170, "y": 603 + Y_OFFSET, "width": 420},
-    "MA3": {"x": 1170, "y": 876 + Y_OFFSET, "width": 420},
-    "MA4": {"x": 1170, "y": 1036 + Y_OFFSET, "width": 420},
-    "ML1": {"x": 1600, "y": 620 + Y_OFFSET, "width": 400},
-    "ML2": {"x": 1600, "y": 849 + Y_OFFSET, "width": 400},
-    "LL1": {"x": 2110, "y": 930 + Y_OFFSET, "width": 520},
-    # Academia nueva: banda superior con los textos AU, en 4 columnas.
-    "AU4": {"x": 300, "y": 170, "width": 560},
-    "AU5": {"x": 900, "y": 170, "width": 560},
-    "AU6": {"x": 1500, "y": 170, "width": 560},
-    "AU7": {"x": 2100, "y": 170, "width": 560},
-    "AU8": {"x": 300, "y": 460, "width": 560},
-    "AU9": {"x": 900, "y": 460, "width": 560},
-    "AU10": {"x": 1500, "y": 460, "width": 560},
+    # Academia: AM1–AM3 en la fila interior; AU4–AU7 después; AU8–AU10 al fondo.
+    "AM1": {"x": 1010, "y": 942, "width": 420},
+    "AM2": {"x": 1530, "y": 876, "width": 420},
+    "AM3": {"x": 2100, "y": 890, "width": 520},
+    "AU4": {"x": 900, "y": 597, "width": 520},
+    "AU5": {"x": 1500, "y": 545, "width": 520},
+    "AU6": {"x": 300, "y": 571, "width": 520},
+    "AU7": {"x": 2100, "y": 578, "width": 520},
+    "AU8": {"x": 1200, "y": 218, "width": 520},
+    "AU9": {"x": 600, "y": 212, "width": 520},
+    "AU10": {"x": 1800, "y": 192, "width": 520},
+    # Música universal: columna a la izquierda, MU1 el más cercano al centro.
+    "MU1": {"x": 400, "y": 1220, "width": 400},
+    "MU2": {"x": 400, "y": 1420, "width": 400},
+    "MU3": {"x": 400, "y": 1030, "width": 400},
+    "MU4": {"x": 400, "y": 860, "width": 400},
+    # Música argentina: MA1–MA4 en dos columnas y MA5 al fondo a la izquierda.
+    "MA1": {"x": 1100, "y": 1580, "width": 420},
+    "MA2": {"x": 1600, "y": 1700, "width": 420},
+    "MA3": {"x": 1050, "y": 1850, "width": 420},
+    "MA4": {"x": 1600, "y": 2010, "width": 420},
+    "MA5": {"x": 480, "y": 1900, "width": 460},
+    # Música latinoamericana: columna a la derecha del centro.
+    "ML1": {"x": 2090, "y": 1550, "width": 400},
+    "ML2": {"x": 2090, "y": 1850, "width": 400},
+    # Literatura: arriba a la derecha.
+    "LL1": {"x": 2100, "y": 1200, "width": 520},
 }
 
 # Correcciones puntuales de saltos de línea perdidos en el Excel.
